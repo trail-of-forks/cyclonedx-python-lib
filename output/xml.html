@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>cyclonedx.output.xml API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>cyclonedx.output.xml</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># encoding: utf-8
+
+# This file is part of CycloneDX Python Lib
+#
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) OWASP Foundation. All Rights Reserved.
+
+from xml.etree import ElementTree
+
+from . import BaseOutput
+from .schema import BaseSchemaVersion, SchemaVersion1Dot0, SchemaVersion1Dot1, SchemaVersion1Dot2, SchemaVersion1Dot3
+from ..model.component import Component
+from ..model.vulnerability import Vulnerability, VulnerabilityRating
+
+
+class Xml(BaseOutput, BaseSchemaVersion):
+    XML_VERSION_DECLARATION: str = &#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&#39;
+
+    def get_target_namespace(self) -&gt; str:
+        return &#39;http://cyclonedx.org/schema/bom/{}&#39;.format(self.get_schema_version())
+
+    @staticmethod
+    def get_vulnerabilities_namespace() -&gt; str:
+        return &#39;http://cyclonedx.org/schema/ext/vulnerability/1.0&#39;
+
+    def output_as_string(self) -&gt; str:
+        bom = self._get_bom_root_element()
+
+        if self.bom_supports_metadata():
+            bom = self._add_metadata(bom=bom)
+
+        if self.get_bom().has_vulnerabilities():
+            ElementTree.register_namespace(&#39;v&#39;, Xml.get_vulnerabilities_namespace())
+
+        components = ElementTree.SubElement(bom, &#39;components&#39;)
+
+        for component in self.get_bom().get_components():
+            component_element = self._get_component_as_xml_element(component=component)
+            components.append(component_element)
+            if component.has_vulnerabilities() and self.component_supports_bom_ref():
+                # Vulnerabilities are only possible when bom-ref is supported by the main CycloneDX schema version
+                vulnerabilities = ElementTree.SubElement(component_element, &#39;v:vulnerabilities&#39;)
+                for vulnerability in component.get_vulnerabilities():
+                    vulnerabilities.append(self._get_vulnerability_as_xml_element(bom_ref=component.get_purl(),
+                                                                                  vulnerability=vulnerability))
+
+        return Xml.XML_VERSION_DECLARATION + ElementTree.tostring(bom, &#39;unicode&#39;)
+
+    def _component_supports_bom_ref_attribute(self) -&gt; bool:
+        return True
+
+    def _get_bom_root_element(self) -&gt; ElementTree.Element:
+        root_attributes = {
+            &#39;xmlns&#39;: self.get_target_namespace(),
+            &#39;version&#39;: &#39;1&#39;,
+            &#39;serialNumber&#39;: self.get_bom().get_urn_uuid()
+        }
+
+        if self.get_bom().has_vulnerabilities():
+            root_attributes[&#39;xmlns:v&#39;] = Xml.get_vulnerabilities_namespace()
+
+        return ElementTree.Element(&#39;bom&#39;, root_attributes)
+
+    def _get_component_as_xml_element(self, component: Component) -&gt; ElementTree.Element:
+        element_attributes = {&#39;type&#39;: component.get_type().value}
+        if self.component_supports_bom_ref():
+            element_attributes[&#39;bom-ref&#39;] = component.get_purl()
+
+        component_element = ElementTree.Element(&#39;component&#39;, element_attributes)
+
+        if self.component_supports_author() and component.get_author() is not None:
+            ElementTree.SubElement(component_element, &#39;author&#39;).text = component.get_author()
+
+        # if publisher and publisher != &#34;UNKNOWN&#34;:
+        #     ElementTree.SubElement(component, &#34;publisher&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, publisher)
+
+        # if name and name != &#34;UNKNOWN&#34;:
+        ElementTree.SubElement(component_element, &#39;name&#39;).text = component.get_name()
+
+        # if version and version != &#34;UNKNOWN&#34;:
+        ElementTree.SubElement(component_element, &#39;version&#39;).text = component.get_version()
+
+        # if description and description != &#34;UNKNOWN&#34;:
+        #     ElementTree.SubElement(component, &#34;description&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, description)
+        #
+        # if hashes:
+        #     hashes_elm = ElementTree.SubElement(component, &#34;hashes&#34;)
+        #     for h in hashes:
+        #         ElementTree.SubElement(hashes_elm, &#34;hash&#34;, alg=h.alg).text = h.content
+        #
+        # if len(licenses):
+        #     licenses_elm = ElementTree.SubElement(component, &#34;licenses&#34;)
+        #     for component_license in licenses:
+        #         if component_license.license is not None:
+        #             license_elm = ElementTree.SubElement(licenses_elm, &#34;license&#34;)
+        #             ElementTree.SubElement(license_elm, &#34;name&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;,
+        #             component_license.license.name)
+
+        # if purl:
+        ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
+
+        # ElementTree.SubElement(component, &#34;modified&#34;).text = modified if modified else &#34;false&#34;
+
+        return component_element
+
+    @staticmethod
+    def _get_vulnerability_as_xml_element(bom_ref: str, vulnerability: Vulnerability) -&gt; ElementTree.Element:
+        vulnerability_element = ElementTree.Element(&#39;v:vulnerability&#39;, {
+            &#39;ref&#39;: bom_ref
+        })
+
+        # id
+        ElementTree.SubElement(vulnerability_element, &#39;v:id&#39;).text = vulnerability.get_id()
+
+        # source
+        if vulnerability.get_source_name():
+            source_element = ElementTree.SubElement(
+                vulnerability_element, &#39;v:source&#39;, attrib={&#39;name&#39;: vulnerability.get_source_name()}
+            )
+            if vulnerability.get_source_url():
+                ElementTree.SubElement(source_element, &#39;v:url&#39;).text = vulnerability.get_source_url().geturl()
+
+        # ratings
+        if vulnerability.has_ratings():
+            ratings_element = ElementTree.SubElement(vulnerability_element, &#39;v:ratings&#39;)
+            rating: VulnerabilityRating
+            for rating in vulnerability.get_ratings():
+                rating_element = ElementTree.SubElement(ratings_element, &#39;v:rating&#39;)
+
+                # rating.score
+                if rating.has_score():
+                    score_element = ElementTree.SubElement(rating_element, &#39;v:score&#39;)
+                    if rating.get_base_score():
+                        ElementTree.SubElement(score_element, &#39;v:base&#39;).text = str(rating.get_base_score())
+                    if rating.get_impact_score():
+                        ElementTree.SubElement(score_element, &#39;v:impact&#39;).text = str(rating.get_impact_score())
+                    if rating.get_exploitability_score():
+                        ElementTree.SubElement(score_element,
+                                               &#39;v:exploitability&#39;).text = str(rating.get_exploitability_score())
+
+                # rating.severity
+                if rating.get_severity():
+                    ElementTree.SubElement(rating_element, &#39;v:severity&#39;).text = rating.get_severity().value
+
+                # rating.severity
+                if rating.get_method():
+                    ElementTree.SubElement(rating_element, &#39;v:method&#39;).text = rating.get_method().value
+
+                # rating.vector
+                if rating.get_vector():
+                    ElementTree.SubElement(rating_element, &#39;v:vector&#39;).text = rating.get_vector()
+
+        # cwes
+        if vulnerability.has_cwes():
+            cwes_element = ElementTree.SubElement(vulnerability_element, &#39;v:cwes&#39;)
+            for cwe in vulnerability.get_cwes():
+                ElementTree.SubElement(cwes_element, &#39;v:cwe&#39;).text = str(cwe)
+
+        # description
+        if vulnerability.get_description():
+            ElementTree.SubElement(vulnerability_element, &#39;v:description&#39;).text = vulnerability.get_description()
+
+        # recommendations
+        if vulnerability.has_recommendations():
+            recommendations_element = ElementTree.SubElement(vulnerability_element, &#39;v:recommendations&#39;)
+            for recommendation in vulnerability.get_recommendations():
+                ElementTree.SubElement(recommendations_element, &#39;v:recommendation&#39;).text = recommendation
+
+        # advisories
+        if vulnerability.has_advisories():
+            advisories_element = ElementTree.SubElement(vulnerability_element, &#39;v:advisories&#39;)
+            for advisory in vulnerability.get_advisories():
+                ElementTree.SubElement(advisories_element, &#39;v:advisory&#39;).text = advisory
+
+        return vulnerability_element
+
+    def _add_metadata(self, bom: ElementTree.Element) -&gt; ElementTree.Element:
+        metadata_e = ElementTree.SubElement(bom, &#39;metadata&#39;)
+        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = self.get_bom().get_metadata().get_timestamp().isoformat()
+        return bom
+
+
+class XmlV1Dot0(Xml, SchemaVersion1Dot0):
+
+    def _get_bom_root_element(self) -&gt; ElementTree.Element:
+        return ElementTree.Element(&#39;bom&#39;, {&#39;xmlns&#39;: self.get_target_namespace(), &#39;version&#39;: &#39;1&#39;})
+
+
+class XmlV1Dot1(Xml, SchemaVersion1Dot1):
+    pass
+
+
+class XmlV1Dot2(Xml, SchemaVersion1Dot2):
+    pass
+
+
+class XmlV1Dot3(Xml, SchemaVersion1Dot3):
+    pass</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="cyclonedx.output.xml.Xml"><code class="flex name class">
+<span>class <span class="ident">Xml</span></span>
+<span>(</span><span>bom: <a title="cyclonedx.model.bom.Bom" href="../model/bom.html#cyclonedx.model.bom.Bom">Bom</a> = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Xml(BaseOutput, BaseSchemaVersion):
+    XML_VERSION_DECLARATION: str = &#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&#39;
+
+    def get_target_namespace(self) -&gt; str:
+        return &#39;http://cyclonedx.org/schema/bom/{}&#39;.format(self.get_schema_version())
+
+    @staticmethod
+    def get_vulnerabilities_namespace() -&gt; str:
+        return &#39;http://cyclonedx.org/schema/ext/vulnerability/1.0&#39;
+
+    def output_as_string(self) -&gt; str:
+        bom = self._get_bom_root_element()
+
+        if self.bom_supports_metadata():
+            bom = self._add_metadata(bom=bom)
+
+        if self.get_bom().has_vulnerabilities():
+            ElementTree.register_namespace(&#39;v&#39;, Xml.get_vulnerabilities_namespace())
+
+        components = ElementTree.SubElement(bom, &#39;components&#39;)
+
+        for component in self.get_bom().get_components():
+            component_element = self._get_component_as_xml_element(component=component)
+            components.append(component_element)
+            if component.has_vulnerabilities() and self.component_supports_bom_ref():
+                # Vulnerabilities are only possible when bom-ref is supported by the main CycloneDX schema version
+                vulnerabilities = ElementTree.SubElement(component_element, &#39;v:vulnerabilities&#39;)
+                for vulnerability in component.get_vulnerabilities():
+                    vulnerabilities.append(self._get_vulnerability_as_xml_element(bom_ref=component.get_purl(),
+                                                                                  vulnerability=vulnerability))
+
+        return Xml.XML_VERSION_DECLARATION + ElementTree.tostring(bom, &#39;unicode&#39;)
+
+    def _component_supports_bom_ref_attribute(self) -&gt; bool:
+        return True
+
+    def _get_bom_root_element(self) -&gt; ElementTree.Element:
+        root_attributes = {
+            &#39;xmlns&#39;: self.get_target_namespace(),
+            &#39;version&#39;: &#39;1&#39;,
+            &#39;serialNumber&#39;: self.get_bom().get_urn_uuid()
+        }
+
+        if self.get_bom().has_vulnerabilities():
+            root_attributes[&#39;xmlns:v&#39;] = Xml.get_vulnerabilities_namespace()
+
+        return ElementTree.Element(&#39;bom&#39;, root_attributes)
+
+    def _get_component_as_xml_element(self, component: Component) -&gt; ElementTree.Element:
+        element_attributes = {&#39;type&#39;: component.get_type().value}
+        if self.component_supports_bom_ref():
+            element_attributes[&#39;bom-ref&#39;] = component.get_purl()
+
+        component_element = ElementTree.Element(&#39;component&#39;, element_attributes)
+
+        if self.component_supports_author() and component.get_author() is not None:
+            ElementTree.SubElement(component_element, &#39;author&#39;).text = component.get_author()
+
+        # if publisher and publisher != &#34;UNKNOWN&#34;:
+        #     ElementTree.SubElement(component, &#34;publisher&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, publisher)
+
+        # if name and name != &#34;UNKNOWN&#34;:
+        ElementTree.SubElement(component_element, &#39;name&#39;).text = component.get_name()
+
+        # if version and version != &#34;UNKNOWN&#34;:
+        ElementTree.SubElement(component_element, &#39;version&#39;).text = component.get_version()
+
+        # if description and description != &#34;UNKNOWN&#34;:
+        #     ElementTree.SubElement(component, &#34;description&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, description)
+        #
+        # if hashes:
+        #     hashes_elm = ElementTree.SubElement(component, &#34;hashes&#34;)
+        #     for h in hashes:
+        #         ElementTree.SubElement(hashes_elm, &#34;hash&#34;, alg=h.alg).text = h.content
+        #
+        # if len(licenses):
+        #     licenses_elm = ElementTree.SubElement(component, &#34;licenses&#34;)
+        #     for component_license in licenses:
+        #         if component_license.license is not None:
+        #             license_elm = ElementTree.SubElement(licenses_elm, &#34;license&#34;)
+        #             ElementTree.SubElement(license_elm, &#34;name&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;,
+        #             component_license.license.name)
+
+        # if purl:
+        ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
+
+        # ElementTree.SubElement(component, &#34;modified&#34;).text = modified if modified else &#34;false&#34;
+
+        return component_element
+
+    @staticmethod
+    def _get_vulnerability_as_xml_element(bom_ref: str, vulnerability: Vulnerability) -&gt; ElementTree.Element:
+        vulnerability_element = ElementTree.Element(&#39;v:vulnerability&#39;, {
+            &#39;ref&#39;: bom_ref
+        })
+
+        # id
+        ElementTree.SubElement(vulnerability_element, &#39;v:id&#39;).text = vulnerability.get_id()
+
+        # source
+        if vulnerability.get_source_name():
+            source_element = ElementTree.SubElement(
+                vulnerability_element, &#39;v:source&#39;, attrib={&#39;name&#39;: vulnerability.get_source_name()}
+            )
+            if vulnerability.get_source_url():
+                ElementTree.SubElement(source_element, &#39;v:url&#39;).text = vulnerability.get_source_url().geturl()
+
+        # ratings
+        if vulnerability.has_ratings():
+            ratings_element = ElementTree.SubElement(vulnerability_element, &#39;v:ratings&#39;)
+            rating: VulnerabilityRating
+            for rating in vulnerability.get_ratings():
+                rating_element = ElementTree.SubElement(ratings_element, &#39;v:rating&#39;)
+
+                # rating.score
+                if rating.has_score():
+                    score_element = ElementTree.SubElement(rating_element, &#39;v:score&#39;)
+                    if rating.get_base_score():
+                        ElementTree.SubElement(score_element, &#39;v:base&#39;).text = str(rating.get_base_score())
+                    if rating.get_impact_score():
+                        ElementTree.SubElement(score_element, &#39;v:impact&#39;).text = str(rating.get_impact_score())
+                    if rating.get_exploitability_score():
+                        ElementTree.SubElement(score_element,
+                                               &#39;v:exploitability&#39;).text = str(rating.get_exploitability_score())
+
+                # rating.severity
+                if rating.get_severity():
+                    ElementTree.SubElement(rating_element, &#39;v:severity&#39;).text = rating.get_severity().value
+
+                # rating.severity
+                if rating.get_method():
+                    ElementTree.SubElement(rating_element, &#39;v:method&#39;).text = rating.get_method().value
+
+                # rating.vector
+                if rating.get_vector():
+                    ElementTree.SubElement(rating_element, &#39;v:vector&#39;).text = rating.get_vector()
+
+        # cwes
+        if vulnerability.has_cwes():
+            cwes_element = ElementTree.SubElement(vulnerability_element, &#39;v:cwes&#39;)
+            for cwe in vulnerability.get_cwes():
+                ElementTree.SubElement(cwes_element, &#39;v:cwe&#39;).text = str(cwe)
+
+        # description
+        if vulnerability.get_description():
+            ElementTree.SubElement(vulnerability_element, &#39;v:description&#39;).text = vulnerability.get_description()
+
+        # recommendations
+        if vulnerability.has_recommendations():
+            recommendations_element = ElementTree.SubElement(vulnerability_element, &#39;v:recommendations&#39;)
+            for recommendation in vulnerability.get_recommendations():
+                ElementTree.SubElement(recommendations_element, &#39;v:recommendation&#39;).text = recommendation
+
+        # advisories
+        if vulnerability.has_advisories():
+            advisories_element = ElementTree.SubElement(vulnerability_element, &#39;v:advisories&#39;)
+            for advisory in vulnerability.get_advisories():
+                ElementTree.SubElement(advisories_element, &#39;v:advisory&#39;).text = advisory
+
+        return vulnerability_element
+
+    def _add_metadata(self, bom: ElementTree.Element) -&gt; ElementTree.Element:
+        metadata_e = ElementTree.SubElement(bom, &#39;metadata&#39;)
+        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = self.get_bom().get_metadata().get_timestamp().isoformat()
+        return bom</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.BaseOutput" href="index.html#cyclonedx.output.BaseOutput">BaseOutput</a></li>
+<li><a title="cyclonedx.output.schema.BaseSchemaVersion" href="schema.html#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.xml.XmlV1Dot0" href="#cyclonedx.output.xml.XmlV1Dot0">XmlV1Dot0</a></li>
+<li><a title="cyclonedx.output.xml.XmlV1Dot1" href="#cyclonedx.output.xml.XmlV1Dot1">XmlV1Dot1</a></li>
+<li><a title="cyclonedx.output.xml.XmlV1Dot2" href="#cyclonedx.output.xml.XmlV1Dot2">XmlV1Dot2</a></li>
+<li><a title="cyclonedx.output.xml.XmlV1Dot3" href="#cyclonedx.output.xml.XmlV1Dot3">XmlV1Dot3</a></li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="cyclonedx.output.xml.Xml.XML_VERSION_DECLARATION"><code class="name">var <span class="ident">XML_VERSION_DECLARATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="cyclonedx.output.xml.Xml.get_vulnerabilities_namespace"><code class="name flex">
+<span>def <span class="ident">get_vulnerabilities_namespace</span></span>(<span>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def get_vulnerabilities_namespace() -&gt; str:
+    return &#39;http://cyclonedx.org/schema/ext/vulnerability/1.0&#39;</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="cyclonedx.output.xml.Xml.get_target_namespace"><code class="name flex">
+<span>def <span class="ident">get_target_namespace</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_target_namespace(self) -&gt; str:
+    return &#39;http://cyclonedx.org/schema/bom/{}&#39;.format(self.get_schema_version())</code></pre>
+</details>
+</dd>
+<dt id="cyclonedx.output.xml.Xml.output_as_string"><code class="name flex">
+<span>def <span class="ident">output_as_string</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def output_as_string(self) -&gt; str:
+    bom = self._get_bom_root_element()
+
+    if self.bom_supports_metadata():
+        bom = self._add_metadata(bom=bom)
+
+    if self.get_bom().has_vulnerabilities():
+        ElementTree.register_namespace(&#39;v&#39;, Xml.get_vulnerabilities_namespace())
+
+    components = ElementTree.SubElement(bom, &#39;components&#39;)
+
+    for component in self.get_bom().get_components():
+        component_element = self._get_component_as_xml_element(component=component)
+        components.append(component_element)
+        if component.has_vulnerabilities() and self.component_supports_bom_ref():
+            # Vulnerabilities are only possible when bom-ref is supported by the main CycloneDX schema version
+            vulnerabilities = ElementTree.SubElement(component_element, &#39;v:vulnerabilities&#39;)
+            for vulnerability in component.get_vulnerabilities():
+                vulnerabilities.append(self._get_vulnerability_as_xml_element(bom_ref=component.get_purl(),
+                                                                              vulnerability=vulnerability))
+
+    return Xml.XML_VERSION_DECLARATION + ElementTree.tostring(bom, &#39;unicode&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="cyclonedx.output.xml.XmlV1Dot0"><code class="flex name class">
+<span>class <span class="ident">XmlV1Dot0</span></span>
+<span>(</span><span>bom: <a title="cyclonedx.model.bom.Bom" href="../model/bom.html#cyclonedx.model.bom.Bom">Bom</a> = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class XmlV1Dot0(Xml, SchemaVersion1Dot0):
+
+    def _get_bom_root_element(self) -&gt; ElementTree.Element:
+        return ElementTree.Element(&#39;bom&#39;, {&#39;xmlns&#39;: self.get_target_namespace(), &#39;version&#39;: &#39;1&#39;})</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.xml.Xml" href="#cyclonedx.output.xml.Xml">Xml</a></li>
+<li><a title="cyclonedx.output.BaseOutput" href="index.html#cyclonedx.output.BaseOutput">BaseOutput</a></li>
+<li><a title="cyclonedx.output.schema.SchemaVersion1Dot0" href="schema.html#cyclonedx.output.schema.SchemaVersion1Dot0">SchemaVersion1Dot0</a></li>
+<li><a title="cyclonedx.output.schema.BaseSchemaVersion" href="schema.html#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="cyclonedx.output.xml.XmlV1Dot0.XML_VERSION_DECLARATION"><code class="name">var <span class="ident">XML_VERSION_DECLARATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="cyclonedx.output.xml.XmlV1Dot1"><code class="flex name class">
+<span>class <span class="ident">XmlV1Dot1</span></span>
+<span>(</span><span>bom: <a title="cyclonedx.model.bom.Bom" href="../model/bom.html#cyclonedx.model.bom.Bom">Bom</a> = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class XmlV1Dot1(Xml, SchemaVersion1Dot1):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.xml.Xml" href="#cyclonedx.output.xml.Xml">Xml</a></li>
+<li><a title="cyclonedx.output.BaseOutput" href="index.html#cyclonedx.output.BaseOutput">BaseOutput</a></li>
+<li><a title="cyclonedx.output.schema.SchemaVersion1Dot1" href="schema.html#cyclonedx.output.schema.SchemaVersion1Dot1">SchemaVersion1Dot1</a></li>
+<li><a title="cyclonedx.output.schema.BaseSchemaVersion" href="schema.html#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="cyclonedx.output.xml.XmlV1Dot1.XML_VERSION_DECLARATION"><code class="name">var <span class="ident">XML_VERSION_DECLARATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="cyclonedx.output.xml.XmlV1Dot2"><code class="flex name class">
+<span>class <span class="ident">XmlV1Dot2</span></span>
+<span>(</span><span>bom: <a title="cyclonedx.model.bom.Bom" href="../model/bom.html#cyclonedx.model.bom.Bom">Bom</a> = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class XmlV1Dot2(Xml, SchemaVersion1Dot2):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.xml.Xml" href="#cyclonedx.output.xml.Xml">Xml</a></li>
+<li><a title="cyclonedx.output.BaseOutput" href="index.html#cyclonedx.output.BaseOutput">BaseOutput</a></li>
+<li><a title="cyclonedx.output.schema.SchemaVersion1Dot2" href="schema.html#cyclonedx.output.schema.SchemaVersion1Dot2">SchemaVersion1Dot2</a></li>
+<li><a title="cyclonedx.output.schema.BaseSchemaVersion" href="schema.html#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="cyclonedx.output.xml.XmlV1Dot2.XML_VERSION_DECLARATION"><code class="name">var <span class="ident">XML_VERSION_DECLARATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="cyclonedx.output.xml.XmlV1Dot3"><code class="flex name class">
+<span>class <span class="ident">XmlV1Dot3</span></span>
+<span>(</span><span>bom: <a title="cyclonedx.model.bom.Bom" href="../model/bom.html#cyclonedx.model.bom.Bom">Bom</a> = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class XmlV1Dot3(Xml, SchemaVersion1Dot3):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="cyclonedx.output.xml.Xml" href="#cyclonedx.output.xml.Xml">Xml</a></li>
+<li><a title="cyclonedx.output.BaseOutput" href="index.html#cyclonedx.output.BaseOutput">BaseOutput</a></li>
+<li><a title="cyclonedx.output.schema.SchemaVersion1Dot3" href="schema.html#cyclonedx.output.schema.SchemaVersion1Dot3">SchemaVersion1Dot3</a></li>
+<li><a title="cyclonedx.output.schema.BaseSchemaVersion" href="schema.html#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="cyclonedx.output.xml.XmlV1Dot3.XML_VERSION_DECLARATION"><code class="name">var <span class="ident">XML_VERSION_DECLARATION</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="cyclonedx.output" href="index.html">cyclonedx.output</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="cyclonedx.output.xml.Xml" href="#cyclonedx.output.xml.Xml">Xml</a></code></h4>
+<ul class="">
+<li><code><a title="cyclonedx.output.xml.Xml.XML_VERSION_DECLARATION" href="#cyclonedx.output.xml.Xml.XML_VERSION_DECLARATION">XML_VERSION_DECLARATION</a></code></li>
+<li><code><a title="cyclonedx.output.xml.Xml.get_target_namespace" href="#cyclonedx.output.xml.Xml.get_target_namespace">get_target_namespace</a></code></li>
+<li><code><a title="cyclonedx.output.xml.Xml.get_vulnerabilities_namespace" href="#cyclonedx.output.xml.Xml.get_vulnerabilities_namespace">get_vulnerabilities_namespace</a></code></li>
+<li><code><a title="cyclonedx.output.xml.Xml.output_as_string" href="#cyclonedx.output.xml.Xml.output_as_string">output_as_string</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="cyclonedx.output.xml.XmlV1Dot0" href="#cyclonedx.output.xml.XmlV1Dot0">XmlV1Dot0</a></code></h4>
+<ul class="">
+<li><code><a title="cyclonedx.output.xml.XmlV1Dot0.XML_VERSION_DECLARATION" href="#cyclonedx.output.xml.XmlV1Dot0.XML_VERSION_DECLARATION">XML_VERSION_DECLARATION</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="cyclonedx.output.xml.XmlV1Dot1" href="#cyclonedx.output.xml.XmlV1Dot1">XmlV1Dot1</a></code></h4>
+<ul class="">
+<li><code><a title="cyclonedx.output.xml.XmlV1Dot1.XML_VERSION_DECLARATION" href="#cyclonedx.output.xml.XmlV1Dot1.XML_VERSION_DECLARATION">XML_VERSION_DECLARATION</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="cyclonedx.output.xml.XmlV1Dot2" href="#cyclonedx.output.xml.XmlV1Dot2">XmlV1Dot2</a></code></h4>
+<ul class="">
+<li><code><a title="cyclonedx.output.xml.XmlV1Dot2.XML_VERSION_DECLARATION" href="#cyclonedx.output.xml.XmlV1Dot2.XML_VERSION_DECLARATION">XML_VERSION_DECLARATION</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="cyclonedx.output.xml.XmlV1Dot3" href="#cyclonedx.output.xml.XmlV1Dot3">XmlV1Dot3</a></code></h4>
+<ul class="">
+<li><code><a title="cyclonedx.output.xml.XmlV1Dot3.XML_VERSION_DECLARATION" href="#cyclonedx.output.xml.XmlV1Dot3.XML_VERSION_DECLARATION">XML_VERSION_DECLARATION</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
