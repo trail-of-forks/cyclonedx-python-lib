@@ -55,9 +55,10 @@ from ..parser import BaseParser
 
 class BomMetaData:
     &#34;&#34;&#34;
-    Our internal representation of the metadata complex type within the CycloneDX standard.
+    This is our internal representation of the metadata complex type within the CycloneDX standard.
 
-    See https://cyclonedx.org/docs/1.3/#type_metadata
+    .. note::
+        See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
     &#34;&#34;&#34;
 
     _timestamp: datetime.datetime
@@ -66,15 +67,24 @@ class BomMetaData:
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
 
     def get_timestamp(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;
+        The date and time (in UTC) when this BomMetaData was created.
+
+        Returns:
+            `datetime.datetime` instance in UTC timezone
+        &#34;&#34;&#34;
         return self._timestamp
 
 
 class Bom:
     &#34;&#34;&#34;
-    This is our internal representation of the BOM.
+    This is our internal representation of a bill-of-materials (BOM).
 
-    We can pass a BOM instance to a Generator to produce CycloneDX in the required format and according
-    to the requested schema version.
+    You can either create a `cyclonedx.model.bom.Bom` yourself programmatically, or generate a `cyclonedx.model.bom.Bom`
+    from a `cyclonedx.parser.BaseParser` implementation.
+
+    Once you have an instance of `cyclonedx.model.bom.Bom`, you can pass this to an instance of
+    `cyclonedx.output.BaseOutput` to produce a CycloneDX document according to a specific schema version and format.
     &#34;&#34;&#34;
 
     _uuid: str
@@ -83,37 +93,116 @@ class Bom:
 
     @staticmethod
     def from_parser(parser: BaseParser):
+        &#34;&#34;&#34;
+        Create a Bom instance from a Parser object.
+
+        Args:
+            parser (`cyclonedx.parser.BaseParser`): A valid parser instance.
+
+        Returns:
+            `cyclonedx.model.bom.Bom`: A Bom instance that represents the valid data held in the supplied parser.
+        &#34;&#34;&#34;
         bom = Bom()
         bom.add_components(parser.get_components())
         return bom
 
     def __init__(self):
+        &#34;&#34;&#34;
+        Create a new Bom that you can manually/programmatically add data to later.
+
+        Returns:
+            New, empty `cyclonedx.model.bom.Bom` instance.
+        &#34;&#34;&#34;
         self._uuid = uuid4()
         self._metadata = BomMetaData()
         self._components.clear()
 
     def add_component(self, component: Component):
+        &#34;&#34;&#34;
+        Add a Component to this Bom instance.
+
+        Args:
+            component:
+                `cyclonedx.model.component.Component` instance to add to this Bom.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._components.append(component)
 
     def add_components(self, components: List[Component]):
+        &#34;&#34;&#34;
+        Add multiple Components at once to this Bom instance.
+
+        Args:
+            components:
+                List of `cyclonedx.model.component.Component` instances to add to this Bom.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._components = self._components + components
 
     def component_count(self) -&gt; int:
+        &#34;&#34;&#34;
+        Returns the current count of Components within this Bom.
+
+        Returns:
+             The number of Components in this Bom as `int`.
+        &#34;&#34;&#34;
         return len(self._components)
 
     def get_components(self) -&gt; List[Component]:
+        &#34;&#34;&#34;
+        Get all the Components currently in this Bom.
+
+        Returns:
+             List of all Components in this Bom.
+        &#34;&#34;&#34;
         return self._components
 
     def get_metadata(self) -&gt; BomMetaData:
+        &#34;&#34;&#34;
+        Get our internal metadata object for this Bom.
+
+        Returns:
+            Metadata object instance for this Bom.
+
+        .. note::
+            See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
+        &#34;&#34;&#34;
         return self._metadata
 
     def get_urn_uuid(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the unique reference for this Bom.
+
+        Returns:
+            URN formatted UUID that uniquely identified this Bom instance.
+        &#34;&#34;&#34;
         return &#39;urn:uuid:{}&#39;.format(self._uuid)
 
     def has_component(self, component: Component) -&gt; bool:
+        &#34;&#34;&#34;
+        Check whether this Bom contains the provided Component.
+
+        Args:
+            component:
+                The instance of `cyclonedx.model.component.Component` to check if this Bom contains.
+
+        Returns:
+            `bool` - `True` if the supplied Component is part of this Bom, `False` otherwise.
+        &#34;&#34;&#34;
         return component in self._components
 
     def has_vulnerabilities(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Check whether this Bom has any declared vulnerabilities.
+
+        Returns:
+            `bool` - `True` if at least one `cyclonedx.model.component.Component` has at least one Vulnerability,
+                `False` otherwise.
+        &#34;&#34;&#34;
         for c in self.get_components():
             if c.has_vulnerabilities():
                 return True
@@ -134,19 +223,27 @@ class Bom:
 <span>class <span class="ident">Bom</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>This is our internal representation of the BOM.</p>
-<p>We can pass a BOM instance to a Generator to produce CycloneDX in the required format and according
-to the requested schema version.</p></div>
+<div class="desc"><p>This is our internal representation of a bill-of-materials (BOM).</p>
+<p>You can either create a <code><a title="cyclonedx.model.bom.Bom" href="#cyclonedx.model.bom.Bom">Bom</a></code> yourself programmatically, or generate a <code><a title="cyclonedx.model.bom.Bom" href="#cyclonedx.model.bom.Bom">Bom</a></code>
+from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#cyclonedx.parser.BaseParser">BaseParser</a></code> implementation.</p>
+<p>Once you have an instance of <code><a title="cyclonedx.model.bom.Bom" href="#cyclonedx.model.bom.Bom">Bom</a></code>, you can pass this to an instance of
+<code><a title="cyclonedx.output.BaseOutput" href="../output/index.html#cyclonedx.output.BaseOutput">BaseOutput</a></code> to produce a CycloneDX document according to a specific schema version and format.</p>
+<p>Create a new Bom that you can manually/programmatically add data to later.</p>
+<h2 id="returns">Returns</h2>
+<p>New, empty <code><a title="cyclonedx.model.bom.Bom" href="#cyclonedx.model.bom.Bom">Bom</a></code> instance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Bom:
     &#34;&#34;&#34;
-    This is our internal representation of the BOM.
+    This is our internal representation of a bill-of-materials (BOM).
 
-    We can pass a BOM instance to a Generator to produce CycloneDX in the required format and according
-    to the requested schema version.
+    You can either create a `cyclonedx.model.bom.Bom` yourself programmatically, or generate a `cyclonedx.model.bom.Bom`
+    from a `cyclonedx.parser.BaseParser` implementation.
+
+    Once you have an instance of `cyclonedx.model.bom.Bom`, you can pass this to an instance of
+    `cyclonedx.output.BaseOutput` to produce a CycloneDX document according to a specific schema version and format.
     &#34;&#34;&#34;
 
     _uuid: str
@@ -155,37 +252,116 @@ to the requested schema version.</p></div>
 
     @staticmethod
     def from_parser(parser: BaseParser):
+        &#34;&#34;&#34;
+        Create a Bom instance from a Parser object.
+
+        Args:
+            parser (`cyclonedx.parser.BaseParser`): A valid parser instance.
+
+        Returns:
+            `cyclonedx.model.bom.Bom`: A Bom instance that represents the valid data held in the supplied parser.
+        &#34;&#34;&#34;
         bom = Bom()
         bom.add_components(parser.get_components())
         return bom
 
     def __init__(self):
+        &#34;&#34;&#34;
+        Create a new Bom that you can manually/programmatically add data to later.
+
+        Returns:
+            New, empty `cyclonedx.model.bom.Bom` instance.
+        &#34;&#34;&#34;
         self._uuid = uuid4()
         self._metadata = BomMetaData()
         self._components.clear()
 
     def add_component(self, component: Component):
+        &#34;&#34;&#34;
+        Add a Component to this Bom instance.
+
+        Args:
+            component:
+                `cyclonedx.model.component.Component` instance to add to this Bom.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._components.append(component)
 
     def add_components(self, components: List[Component]):
+        &#34;&#34;&#34;
+        Add multiple Components at once to this Bom instance.
+
+        Args:
+            components:
+                List of `cyclonedx.model.component.Component` instances to add to this Bom.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._components = self._components + components
 
     def component_count(self) -&gt; int:
+        &#34;&#34;&#34;
+        Returns the current count of Components within this Bom.
+
+        Returns:
+             The number of Components in this Bom as `int`.
+        &#34;&#34;&#34;
         return len(self._components)
 
     def get_components(self) -&gt; List[Component]:
+        &#34;&#34;&#34;
+        Get all the Components currently in this Bom.
+
+        Returns:
+             List of all Components in this Bom.
+        &#34;&#34;&#34;
         return self._components
 
     def get_metadata(self) -&gt; BomMetaData:
+        &#34;&#34;&#34;
+        Get our internal metadata object for this Bom.
+
+        Returns:
+            Metadata object instance for this Bom.
+
+        .. note::
+            See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
+        &#34;&#34;&#34;
         return self._metadata
 
     def get_urn_uuid(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the unique reference for this Bom.
+
+        Returns:
+            URN formatted UUID that uniquely identified this Bom instance.
+        &#34;&#34;&#34;
         return &#39;urn:uuid:{}&#39;.format(self._uuid)
 
     def has_component(self, component: Component) -&gt; bool:
+        &#34;&#34;&#34;
+        Check whether this Bom contains the provided Component.
+
+        Args:
+            component:
+                The instance of `cyclonedx.model.component.Component` to check if this Bom contains.
+
+        Returns:
+            `bool` - `True` if the supplied Component is part of this Bom, `False` otherwise.
+        &#34;&#34;&#34;
         return component in self._components
 
     def has_vulnerabilities(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Check whether this Bom has any declared vulnerabilities.
+
+        Returns:
+            `bool` - `True` if at least one `cyclonedx.model.component.Component` has at least one Vulnerability,
+                `False` otherwise.
+        &#34;&#34;&#34;
         for c in self.get_components():
             if c.has_vulnerabilities():
                 return True
@@ -198,13 +374,26 @@ to the requested schema version.</p></div>
 <span>def <span class="ident">from_parser</span></span>(<span>parser: <a title="cyclonedx.parser.BaseParser" href="../parser/index.html#cyclonedx.parser.BaseParser">BaseParser</a>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Create a Bom instance from a Parser object.</p>
+<h2 id="args">Args</h2>
+<p>parser (<code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#cyclonedx.parser.BaseParser">BaseParser</a></code>): A valid parser instance.</p>
+<h2 id="returns">Returns</h2>
+<p><code><a title="cyclonedx.model.bom.Bom" href="#cyclonedx.model.bom.Bom">Bom</a></code>: A Bom instance that represents the valid data held in the supplied parser.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
 def from_parser(parser: BaseParser):
+    &#34;&#34;&#34;
+    Create a Bom instance from a Parser object.
+
+    Args:
+        parser (`cyclonedx.parser.BaseParser`): A valid parser instance.
+
+    Returns:
+        `cyclonedx.model.bom.Bom`: A Bom instance that represents the valid data held in the supplied parser.
+    &#34;&#34;&#34;
     bom = Bom()
     bom.add_components(parser.get_components())
     return bom</code></pre>
@@ -217,12 +406,27 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">add_component</span></span>(<span>self, component: <a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add a Component to this Bom instance.</p>
+<h2 id="args">Args</h2>
+<p>component:
+<code><a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a></code> instance to add to this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def add_component(self, component: Component):
+    &#34;&#34;&#34;
+    Add a Component to this Bom instance.
+
+    Args:
+        component:
+            `cyclonedx.model.component.Component` instance to add to this Bom.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._components.append(component)</code></pre>
 </details>
 </dd>
@@ -230,12 +434,27 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">add_components</span></span>(<span>self, components: List[<a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a>])</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add multiple Components at once to this Bom instance.</p>
+<h2 id="args">Args</h2>
+<p>components:
+List of <code><a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a></code> instances to add to this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def add_components(self, components: List[Component]):
+    &#34;&#34;&#34;
+    Add multiple Components at once to this Bom instance.
+
+    Args:
+        components:
+            List of `cyclonedx.model.component.Component` instances to add to this Bom.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._components = self._components + components</code></pre>
 </details>
 </dd>
@@ -243,12 +462,20 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">component_count</span></span>(<span>self) ‑> int</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Returns the current count of Components within this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>The number of Components in this Bom as <code>int</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def component_count(self) -&gt; int:
+    &#34;&#34;&#34;
+    Returns the current count of Components within this Bom.
+
+    Returns:
+         The number of Components in this Bom as `int`.
+    &#34;&#34;&#34;
     return len(self._components)</code></pre>
 </details>
 </dd>
@@ -256,12 +483,20 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">get_components</span></span>(<span>self) ‑> List[<a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a>]</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get all the Components currently in this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>List of all Components in this Bom.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_components(self) -&gt; List[Component]:
+    &#34;&#34;&#34;
+    Get all the Components currently in this Bom.
+
+    Returns:
+         List of all Components in this Bom.
+    &#34;&#34;&#34;
     return self._components</code></pre>
 </details>
 </dd>
@@ -269,12 +504,27 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">get_metadata</span></span>(<span>self) ‑> <a title="cyclonedx.model.bom.BomMetaData" href="#cyclonedx.model.bom.BomMetaData">BomMetaData</a></span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get our internal metadata object for this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>Metadata object instance for this Bom.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the CycloneDX Schema for Bom metadata: <a href="https://cyclonedx.org/docs/1.3/#type_metadata">https://cyclonedx.org/docs/1.3/#type_metadata</a></p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_metadata(self) -&gt; BomMetaData:
+    &#34;&#34;&#34;
+    Get our internal metadata object for this Bom.
+
+    Returns:
+        Metadata object instance for this Bom.
+
+    .. note::
+        See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
+    &#34;&#34;&#34;
     return self._metadata</code></pre>
 </details>
 </dd>
@@ -282,12 +532,20 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">get_urn_uuid</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the unique reference for this Bom.</p>
+<h2 id="returns">Returns</h2>
+<p>URN formatted UUID that uniquely identified this Bom instance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_urn_uuid(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the unique reference for this Bom.
+
+    Returns:
+        URN formatted UUID that uniquely identified this Bom instance.
+    &#34;&#34;&#34;
     return &#39;urn:uuid:{}&#39;.format(self._uuid)</code></pre>
 </details>
 </dd>
@@ -295,12 +553,27 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">has_component</span></span>(<span>self, component: <a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a>) ‑> bool</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Check whether this Bom contains the provided Component.</p>
+<h2 id="args">Args</h2>
+<p>component:
+The instance of <code><a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a></code> to check if this Bom contains.</p>
+<h2 id="returns">Returns</h2>
+<p><code>bool</code> - <code>True</code> if the supplied Component is part of this Bom, <code>False</code> otherwise.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def has_component(self, component: Component) -&gt; bool:
+    &#34;&#34;&#34;
+    Check whether this Bom contains the provided Component.
+
+    Args:
+        component:
+            The instance of `cyclonedx.model.component.Component` to check if this Bom contains.
+
+    Returns:
+        `bool` - `True` if the supplied Component is part of this Bom, `False` otherwise.
+    &#34;&#34;&#34;
     return component in self._components</code></pre>
 </details>
 </dd>
@@ -308,12 +581,22 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">has_vulnerabilities</span></span>(<span>self) ‑> bool</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Check whether this Bom has any declared vulnerabilities.</p>
+<h2 id="returns">Returns</h2>
+<p><code>bool</code> - <code>True</code> if at least one <code><a title="cyclonedx.model.component.Component" href="component.html#cyclonedx.model.component.Component">Component</a></code> has at least one Vulnerability,
+<code>False</code> otherwise.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def has_vulnerabilities(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Check whether this Bom has any declared vulnerabilities.
+
+    Returns:
+        `bool` - `True` if at least one `cyclonedx.model.component.Component` has at least one Vulnerability,
+            `False` otherwise.
+    &#34;&#34;&#34;
     for c in self.get_components():
         if c.has_vulnerabilities():
             return True
@@ -327,17 +610,21 @@ def from_parser(parser: BaseParser):
 <span>class <span class="ident">BomMetaData</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Our internal representation of the metadata complex type within the CycloneDX standard.</p>
-<p>See <a href="https://cyclonedx.org/docs/1.3/#type_metadata">https://cyclonedx.org/docs/1.3/#type_metadata</a></p></div>
+<div class="desc"><p>This is our internal representation of the metadata complex type within the CycloneDX standard.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the CycloneDX Schema for Bom metadata: <a href="https://cyclonedx.org/docs/1.3/#type_metadata">https://cyclonedx.org/docs/1.3/#type_metadata</a></p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class BomMetaData:
     &#34;&#34;&#34;
-    Our internal representation of the metadata complex type within the CycloneDX standard.
+    This is our internal representation of the metadata complex type within the CycloneDX standard.
 
-    See https://cyclonedx.org/docs/1.3/#type_metadata
+    .. note::
+        See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
     &#34;&#34;&#34;
 
     _timestamp: datetime.datetime
@@ -346,6 +633,12 @@ def from_parser(parser: BaseParser):
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
 
     def get_timestamp(self) -&gt; datetime.datetime:
+        &#34;&#34;&#34;
+        The date and time (in UTC) when this BomMetaData was created.
+
+        Returns:
+            `datetime.datetime` instance in UTC timezone
+        &#34;&#34;&#34;
         return self._timestamp</code></pre>
 </details>
 <h3>Methods</h3>
@@ -354,12 +647,20 @@ def from_parser(parser: BaseParser):
 <span>def <span class="ident">get_timestamp</span></span>(<span>self) ‑> datetime.datetime</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The date and time (in UTC) when this BomMetaData was created.</p>
+<h2 id="returns">Returns</h2>
+<p><code>datetime.datetime</code> instance in UTC timezone</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_timestamp(self) -&gt; datetime.datetime:
+    &#34;&#34;&#34;
+    The date and time (in UTC) when this BomMetaData was created.
+
+    Returns:
+        `datetime.datetime` instance in UTC timezone
+    &#34;&#34;&#34;
     return self._timestamp</code></pre>
 </details>
 </dd>
