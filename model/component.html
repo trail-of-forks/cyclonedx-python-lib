@@ -56,8 +56,10 @@ PURL_TYPE_PREFIX = &#39;pypi&#39;
 
 class ComponentType(Enum):
     &#34;&#34;&#34;
-    Enum object that defines the permissible &#39;types&#39; for a Component according to the CycloneDX
-    schemas.
+    Enum object that defines the permissible &#39;types&#39; for a Component according to the CycloneDX schema.
+
+    .. note::
+        See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_classification
     &#34;&#34;&#34;
     APPLICATION = &#39;application&#39;
     CONTAINER = &#39;container&#39;
@@ -71,7 +73,10 @@ class ComponentType(Enum):
 
 class Component:
     &#34;&#34;&#34;
-    An object that mirrors the Component type in the CycloneDX schema.
+    This is our internal representation of a Component within a Bom.
+
+    .. note::
+        See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_component
     &#34;&#34;&#34;
     _type: ComponentType
     _name: str
@@ -93,52 +98,147 @@ class Component:
         self._vulnerabilites = []
 
     def add_vulnerability(self, vulnerability: Vulnerability):
+        &#34;&#34;&#34;
+        Add a Vulnerability to this Component.
+
+        Args:
+            vulnerability:
+                `cyclonedx.model.vulnerability.Vulnerability` instance to add to this Component.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._vulnerabilites.append(vulnerability)
 
     def get_author(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the author of this Component.
+
+        Returns:
+            Declared author of this Component as `str`.
+        &#34;&#34;&#34;
         return self._author
 
     def get_description(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the description of this Component.
+
+        Returns:
+            Declared description of this Component as `str`.
+        &#34;&#34;&#34;
         return self._description
 
     def get_license(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the license of this Component.
+
+        Returns:
+            Declared license of this Component as `str`.
+        &#34;&#34;&#34;
         return self._license
 
     def get_name(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the name of this Component.
+
+        Returns:
+            Declared name of this Component as `str`.
+        &#34;&#34;&#34;
         return self._name
 
     def get_purl(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the PURL for this Component.
+
+        Returns:
+            PackageURL that reflects this Component as `str`.
+        &#34;&#34;&#34;
         base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
         if self._qualifiers:
             base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
         return base_purl
 
     def get_type(self) -&gt; ComponentType:
+        &#34;&#34;&#34;
+        Get the type of this Component.
+
+        Returns:
+            Declared type of this Component as `ComponentType`.
+        &#34;&#34;&#34;
         return self._type
 
     def get_version(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the version of this Component.
+
+        Returns:
+            Declared version of this Component as `str`.
+        &#34;&#34;&#34;
         return self._version
 
     def get_vulnerabilities(self) -&gt; List[Vulnerability]:
+        &#34;&#34;&#34;
+        Get all the Vulnerabilities for this Component.
+
+        Returns:
+             List of `Vulnerability` objects assigned to this Component.
+        &#34;&#34;&#34;
         return self._vulnerabilites
 
     def has_vulnerabilities(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Does this Component have any vulnerabilities?
+
+        Returns:
+             `True` if this Component has 1 or more vulnerabilities, `False` otherwise.
+        &#34;&#34;&#34;
         return len(self._vulnerabilites) != 0
 
     def set_author(self, author: str):
+        &#34;&#34;&#34;
+        Set the author of this Component.
+
+        Args:
+            author:
+                `str` to set the author to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._author = author
 
     def set_description(self, description: str):
+        &#34;&#34;&#34;
+        Set the description of this Component.
+
+        Args:
+            description:
+                `str` to set the description to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._description = description
 
     def set_license(self, license_str: str):
+        &#34;&#34;&#34;
+        Set the license for this Component.
+
+        Args:
+            license_str:
+                `str` to set the license to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._license = license_str
 
     def to_package_url(self) -&gt; PackageURL:
         &#34;&#34;&#34;
         Return a PackageURL representation of this Component.
 
-        :return: PackageURL
+        Returns:
+            `packageurl.PackageURL` instance which represents this Component.
         &#34;&#34;&#34;&#34;&#34;
         return PackageURL(
             type=PURL_TYPE_PREFIX,
@@ -168,14 +268,21 @@ class Component:
 <span>(</span><span>name: str, version: str, qualifiers: str = None, component_type: <a title="cyclonedx.model.component.ComponentType" href="#cyclonedx.model.component.ComponentType">ComponentType</a> = ComponentType.LIBRARY)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>An object that mirrors the Component type in the CycloneDX schema.</p></div>
+<div class="desc"><p>This is our internal representation of a Component within a Bom.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the CycloneDX Schema definition: <a href="https://cyclonedx.org/docs/1.3/#type_component">https://cyclonedx.org/docs/1.3/#type_component</a></p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Component:
     &#34;&#34;&#34;
-    An object that mirrors the Component type in the CycloneDX schema.
+    This is our internal representation of a Component within a Bom.
+
+    .. note::
+        See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_component
     &#34;&#34;&#34;
     _type: ComponentType
     _name: str
@@ -197,52 +304,147 @@ class Component:
         self._vulnerabilites = []
 
     def add_vulnerability(self, vulnerability: Vulnerability):
+        &#34;&#34;&#34;
+        Add a Vulnerability to this Component.
+
+        Args:
+            vulnerability:
+                `cyclonedx.model.vulnerability.Vulnerability` instance to add to this Component.
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._vulnerabilites.append(vulnerability)
 
     def get_author(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the author of this Component.
+
+        Returns:
+            Declared author of this Component as `str`.
+        &#34;&#34;&#34;
         return self._author
 
     def get_description(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the description of this Component.
+
+        Returns:
+            Declared description of this Component as `str`.
+        &#34;&#34;&#34;
         return self._description
 
     def get_license(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the license of this Component.
+
+        Returns:
+            Declared license of this Component as `str`.
+        &#34;&#34;&#34;
         return self._license
 
     def get_name(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the name of this Component.
+
+        Returns:
+            Declared name of this Component as `str`.
+        &#34;&#34;&#34;
         return self._name
 
     def get_purl(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the PURL for this Component.
+
+        Returns:
+            PackageURL that reflects this Component as `str`.
+        &#34;&#34;&#34;
         base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
         if self._qualifiers:
             base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
         return base_purl
 
     def get_type(self) -&gt; ComponentType:
+        &#34;&#34;&#34;
+        Get the type of this Component.
+
+        Returns:
+            Declared type of this Component as `ComponentType`.
+        &#34;&#34;&#34;
         return self._type
 
     def get_version(self) -&gt; str:
+        &#34;&#34;&#34;
+        Get the version of this Component.
+
+        Returns:
+            Declared version of this Component as `str`.
+        &#34;&#34;&#34;
         return self._version
 
     def get_vulnerabilities(self) -&gt; List[Vulnerability]:
+        &#34;&#34;&#34;
+        Get all the Vulnerabilities for this Component.
+
+        Returns:
+             List of `Vulnerability` objects assigned to this Component.
+        &#34;&#34;&#34;
         return self._vulnerabilites
 
     def has_vulnerabilities(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Does this Component have any vulnerabilities?
+
+        Returns:
+             `True` if this Component has 1 or more vulnerabilities, `False` otherwise.
+        &#34;&#34;&#34;
         return len(self._vulnerabilites) != 0
 
     def set_author(self, author: str):
+        &#34;&#34;&#34;
+        Set the author of this Component.
+
+        Args:
+            author:
+                `str` to set the author to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._author = author
 
     def set_description(self, description: str):
+        &#34;&#34;&#34;
+        Set the description of this Component.
+
+        Args:
+            description:
+                `str` to set the description to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._description = description
 
     def set_license(self, license_str: str):
+        &#34;&#34;&#34;
+        Set the license for this Component.
+
+        Args:
+            license_str:
+                `str` to set the license to
+
+        Returns:
+            None
+        &#34;&#34;&#34;
         self._license = license_str
 
     def to_package_url(self) -&gt; PackageURL:
         &#34;&#34;&#34;
         Return a PackageURL representation of this Component.
 
-        :return: PackageURL
+        Returns:
+            `packageurl.PackageURL` instance which represents this Component.
         &#34;&#34;&#34;&#34;&#34;
         return PackageURL(
             type=PURL_TYPE_PREFIX,
@@ -263,12 +465,27 @@ class Component:
 <span>def <span class="ident">add_vulnerability</span></span>(<span>self, vulnerability: <a title="cyclonedx.model.vulnerability.Vulnerability" href="vulnerability.html#cyclonedx.model.vulnerability.Vulnerability">Vulnerability</a>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Add a Vulnerability to this Component.</p>
+<h2 id="args">Args</h2>
+<p>vulnerability:
+<code><a title="cyclonedx.model.vulnerability.Vulnerability" href="vulnerability.html#cyclonedx.model.vulnerability.Vulnerability">Vulnerability</a></code> instance to add to this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def add_vulnerability(self, vulnerability: Vulnerability):
+    &#34;&#34;&#34;
+    Add a Vulnerability to this Component.
+
+    Args:
+        vulnerability:
+            `cyclonedx.model.vulnerability.Vulnerability` instance to add to this Component.
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._vulnerabilites.append(vulnerability)</code></pre>
 </details>
 </dd>
@@ -276,12 +493,20 @@ class Component:
 <span>def <span class="ident">get_author</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the author of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared author of this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_author(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the author of this Component.
+
+    Returns:
+        Declared author of this Component as `str`.
+    &#34;&#34;&#34;
     return self._author</code></pre>
 </details>
 </dd>
@@ -289,12 +514,20 @@ class Component:
 <span>def <span class="ident">get_description</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the description of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared description of this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_description(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the description of this Component.
+
+    Returns:
+        Declared description of this Component as `str`.
+    &#34;&#34;&#34;
     return self._description</code></pre>
 </details>
 </dd>
@@ -302,12 +535,20 @@ class Component:
 <span>def <span class="ident">get_license</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the license of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared license of this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_license(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the license of this Component.
+
+    Returns:
+        Declared license of this Component as `str`.
+    &#34;&#34;&#34;
     return self._license</code></pre>
 </details>
 </dd>
@@ -315,12 +556,20 @@ class Component:
 <span>def <span class="ident">get_name</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the name of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared name of this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_name(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the name of this Component.
+
+    Returns:
+        Declared name of this Component as `str`.
+    &#34;&#34;&#34;
     return self._name</code></pre>
 </details>
 </dd>
@@ -328,12 +577,20 @@ class Component:
 <span>def <span class="ident">get_purl</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the PURL for this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>PackageURL that reflects this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_purl(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the PURL for this Component.
+
+    Returns:
+        PackageURL that reflects this Component as `str`.
+    &#34;&#34;&#34;
     base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
     if self._qualifiers:
         base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
@@ -344,12 +601,20 @@ class Component:
 <span>def <span class="ident">get_type</span></span>(<span>self) ‑> <a title="cyclonedx.model.component.ComponentType" href="#cyclonedx.model.component.ComponentType">ComponentType</a></span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the type of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared type of this Component as <code><a title="cyclonedx.model.component.ComponentType" href="#cyclonedx.model.component.ComponentType">ComponentType</a></code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_type(self) -&gt; ComponentType:
+    &#34;&#34;&#34;
+    Get the type of this Component.
+
+    Returns:
+        Declared type of this Component as `ComponentType`.
+    &#34;&#34;&#34;
     return self._type</code></pre>
 </details>
 </dd>
@@ -357,12 +622,20 @@ class Component:
 <span>def <span class="ident">get_version</span></span>(<span>self) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get the version of this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>Declared version of this Component as <code>str</code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_version(self) -&gt; str:
+    &#34;&#34;&#34;
+    Get the version of this Component.
+
+    Returns:
+        Declared version of this Component as `str`.
+    &#34;&#34;&#34;
     return self._version</code></pre>
 </details>
 </dd>
@@ -370,12 +643,20 @@ class Component:
 <span>def <span class="ident">get_vulnerabilities</span></span>(<span>self) ‑> List[<a title="cyclonedx.model.vulnerability.Vulnerability" href="vulnerability.html#cyclonedx.model.vulnerability.Vulnerability">Vulnerability</a>]</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get all the Vulnerabilities for this Component.</p>
+<h2 id="returns">Returns</h2>
+<p>List of <code>Vulnerability</code> objects assigned to this Component.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_vulnerabilities(self) -&gt; List[Vulnerability]:
+    &#34;&#34;&#34;
+    Get all the Vulnerabilities for this Component.
+
+    Returns:
+         List of `Vulnerability` objects assigned to this Component.
+    &#34;&#34;&#34;
     return self._vulnerabilites</code></pre>
 </details>
 </dd>
@@ -383,12 +664,20 @@ class Component:
 <span>def <span class="ident">has_vulnerabilities</span></span>(<span>self) ‑> bool</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Does this Component have any vulnerabilities?</p>
+<h2 id="returns">Returns</h2>
+<p><code>True</code> if this Component has 1 or more vulnerabilities, <code>False</code> otherwise.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def has_vulnerabilities(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Does this Component have any vulnerabilities?
+
+    Returns:
+         `True` if this Component has 1 or more vulnerabilities, `False` otherwise.
+    &#34;&#34;&#34;
     return len(self._vulnerabilites) != 0</code></pre>
 </details>
 </dd>
@@ -396,12 +685,27 @@ class Component:
 <span>def <span class="ident">set_author</span></span>(<span>self, author: str)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Set the author of this Component.</p>
+<h2 id="args">Args</h2>
+<p>author:
+<code>str</code> to set the author to</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def set_author(self, author: str):
+    &#34;&#34;&#34;
+    Set the author of this Component.
+
+    Args:
+        author:
+            `str` to set the author to
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._author = author</code></pre>
 </details>
 </dd>
@@ -409,12 +713,27 @@ class Component:
 <span>def <span class="ident">set_description</span></span>(<span>self, description: str)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Set the description of this Component.</p>
+<h2 id="args">Args</h2>
+<p>description:
+<code>str</code> to set the description to</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def set_description(self, description: str):
+    &#34;&#34;&#34;
+    Set the description of this Component.
+
+    Args:
+        description:
+            `str` to set the description to
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._description = description</code></pre>
 </details>
 </dd>
@@ -422,12 +741,27 @@ class Component:
 <span>def <span class="ident">set_license</span></span>(<span>self, license_str: str)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Set the license for this Component.</p>
+<h2 id="args">Args</h2>
+<p>license_str:
+<code>str</code> to set the license to</p>
+<h2 id="returns">Returns</h2>
+<p>None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def set_license(self, license_str: str):
+    &#34;&#34;&#34;
+    Set the license for this Component.
+
+    Args:
+        license_str:
+            `str` to set the license to
+
+    Returns:
+        None
+    &#34;&#34;&#34;
     self._license = license_str</code></pre>
 </details>
 </dd>
@@ -436,7 +770,8 @@ class Component:
 </code></dt>
 <dd>
 <div class="desc"><p>Return a PackageURL representation of this Component.</p>
-<p>:return: PackageURL</p></div>
+<h2 id="returns">Returns</h2>
+<p><code>packageurl.PackageURL</code> instance which represents this Component.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -445,7 +780,8 @@ class Component:
     &#34;&#34;&#34;
     Return a PackageURL representation of this Component.
 
-    :return: PackageURL
+    Returns:
+        `packageurl.PackageURL` instance which represents this Component.
     &#34;&#34;&#34;&#34;&#34;
     return PackageURL(
         type=PURL_TYPE_PREFIX,
@@ -462,16 +798,21 @@ class Component:
 <span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Enum object that defines the permissible 'types' for a Component according to the CycloneDX
-schemas.</p></div>
+<div class="desc"><p>Enum object that defines the permissible 'types' for a Component according to the CycloneDX schema.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the CycloneDX Schema definition: <a href="https://cyclonedx.org/docs/1.3/#type_classification">https://cyclonedx.org/docs/1.3/#type_classification</a></p>
+</div></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class ComponentType(Enum):
     &#34;&#34;&#34;
-    Enum object that defines the permissible &#39;types&#39; for a Component according to the CycloneDX
-    schemas.
+    Enum object that defines the permissible &#39;types&#39; for a Component according to the CycloneDX schema.
+
+    .. note::
+        See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_classification
     &#34;&#34;&#34;
     APPLICATION = &#39;application&#39;
     CONTAINER = &#39;container&#39;
