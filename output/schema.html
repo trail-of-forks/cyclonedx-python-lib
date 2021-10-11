@@ -50,6 +50,9 @@ from abc import ABC
 
 class BaseSchemaVersion(ABC):
 
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return True
+
     def bom_supports_metadata(self) -&gt; bool:
         return True
 
@@ -77,6 +80,9 @@ class SchemaVersion1Dot2(BaseSchemaVersion):
 
 class SchemaVersion1Dot1(BaseSchemaVersion):
 
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return False
+
     def bom_supports_metadata(self) -&gt; bool:
         return False
 
@@ -88,6 +94,9 @@ class SchemaVersion1Dot1(BaseSchemaVersion):
 
 
 class SchemaVersion1Dot0(BaseSchemaVersion):
+
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return False
 
     def bom_supports_metadata(self) -&gt; bool:
         return False
@@ -123,6 +132,9 @@ inheritance.</p></div>
 </summary>
 <pre><code class="python">class BaseSchemaVersion(ABC):
 
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return True
+
     def bom_supports_metadata(self) -&gt; bool:
         return True
 
@@ -150,6 +162,19 @@ inheritance.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="cyclonedx.output.schema.BaseSchemaVersion.bom_metadata_supports_tools"><code class="name flex">
+<span>def <span class="ident">bom_metadata_supports_tools</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
+    return True</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.output.schema.BaseSchemaVersion.bom_supports_metadata"><code class="name flex">
 <span>def <span class="ident">bom_supports_metadata</span></span>(<span>self) ‑> bool</span>
 </code></dt>
@@ -216,6 +241,9 @@ inheritance.</p></div>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot0(BaseSchemaVersion):
 
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return False
+
     def bom_supports_metadata(self) -&gt; bool:
         return False
 
@@ -240,6 +268,19 @@ inheritance.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="cyclonedx.output.schema.SchemaVersion1Dot0.bom_metadata_supports_tools"><code class="name flex">
+<span>def <span class="ident">bom_metadata_supports_tools</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
+    return False</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.output.schema.SchemaVersion1Dot0.bom_supports_metadata"><code class="name flex">
 <span>def <span class="ident">bom_supports_metadata</span></span>(<span>self) ‑> bool</span>
 </code></dt>
@@ -306,6 +347,9 @@ inheritance.</p></div>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot1(BaseSchemaVersion):
 
+    def bom_metadata_supports_tools(self) -&gt; bool:
+        return False
+
     def bom_supports_metadata(self) -&gt; bool:
         return False
 
@@ -327,6 +371,19 @@ inheritance.</p></div>
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="cyclonedx.output.schema.SchemaVersion1Dot1.bom_metadata_supports_tools"><code class="name flex">
+<span>def <span class="ident">bom_metadata_supports_tools</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
+    return False</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.output.schema.SchemaVersion1Dot1.bom_supports_metadata"><code class="name flex">
 <span>def <span class="ident">bom_supports_metadata</span></span>(<span>self) ‑> bool</span>
 </code></dt>
@@ -471,6 +528,7 @@ inheritance.</p></div>
 <li>
 <h4><code><a title="cyclonedx.output.schema.BaseSchemaVersion" href="#cyclonedx.output.schema.BaseSchemaVersion">BaseSchemaVersion</a></code></h4>
 <ul class="">
+<li><code><a title="cyclonedx.output.schema.BaseSchemaVersion.bom_metadata_supports_tools" href="#cyclonedx.output.schema.BaseSchemaVersion.bom_metadata_supports_tools">bom_metadata_supports_tools</a></code></li>
 <li><code><a title="cyclonedx.output.schema.BaseSchemaVersion.bom_supports_metadata" href="#cyclonedx.output.schema.BaseSchemaVersion.bom_supports_metadata">bom_supports_metadata</a></code></li>
 <li><code><a title="cyclonedx.output.schema.BaseSchemaVersion.component_supports_author" href="#cyclonedx.output.schema.BaseSchemaVersion.component_supports_author">component_supports_author</a></code></li>
 <li><code><a title="cyclonedx.output.schema.BaseSchemaVersion.component_supports_bom_ref" href="#cyclonedx.output.schema.BaseSchemaVersion.component_supports_bom_ref">component_supports_bom_ref</a></code></li>
@@ -480,6 +538,7 @@ inheritance.</p></div>
 <li>
 <h4><code><a title="cyclonedx.output.schema.SchemaVersion1Dot0" href="#cyclonedx.output.schema.SchemaVersion1Dot0">SchemaVersion1Dot0</a></code></h4>
 <ul class="">
+<li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot0.bom_metadata_supports_tools" href="#cyclonedx.output.schema.SchemaVersion1Dot0.bom_metadata_supports_tools">bom_metadata_supports_tools</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot0.bom_supports_metadata" href="#cyclonedx.output.schema.SchemaVersion1Dot0.bom_supports_metadata">bom_supports_metadata</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot0.component_supports_author" href="#cyclonedx.output.schema.SchemaVersion1Dot0.component_supports_author">component_supports_author</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot0.component_supports_bom_ref" href="#cyclonedx.output.schema.SchemaVersion1Dot0.component_supports_bom_ref">component_supports_bom_ref</a></code></li>
@@ -489,6 +548,7 @@ inheritance.</p></div>
 <li>
 <h4><code><a title="cyclonedx.output.schema.SchemaVersion1Dot1" href="#cyclonedx.output.schema.SchemaVersion1Dot1">SchemaVersion1Dot1</a></code></h4>
 <ul class="">
+<li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot1.bom_metadata_supports_tools" href="#cyclonedx.output.schema.SchemaVersion1Dot1.bom_metadata_supports_tools">bom_metadata_supports_tools</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot1.bom_supports_metadata" href="#cyclonedx.output.schema.SchemaVersion1Dot1.bom_supports_metadata">bom_supports_metadata</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot1.component_supports_author" href="#cyclonedx.output.schema.SchemaVersion1Dot1.component_supports_author">component_supports_author</a></code></li>
 <li><code><a title="cyclonedx.output.schema.SchemaVersion1Dot1.get_schema_version" href="#cyclonedx.output.schema.SchemaVersion1Dot1.get_schema_version">get_schema_version</a></code></li>

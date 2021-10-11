@@ -87,10 +87,21 @@ class Json(BaseOutput, BaseSchemaVersion):
         return c
 
     def _get_metadata_as_dict(self) -&gt; dict:
-        metadata = self.get_bom().get_metadata()
-        return {
-            &#34;timestamp&#34;: metadata.get_timestamp().isoformat()
+        bom_metadata = self.get_bom().get_metadata()
+        metadata = {
+            &#34;timestamp&#34;: bom_metadata.get_timestamp().isoformat()
         }
+
+        if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
+            metadata[&#39;tools&#39;] = []
+            for tool in bom_metadata.get_tools():
+                metadata[&#39;tools&#39;].append({
+                    &#34;vendor&#34;: tool.get_vendor(),
+                    &#34;name&#34;: tool.get_name(),
+                    &#34;version&#34;: tool.get_version()
+                })
+
+        return metadata
 
 
 class JsonV1Dot0(Json, SchemaVersion1Dot0):
@@ -164,10 +175,21 @@ inheritance.</p></div>
         return c
 
     def _get_metadata_as_dict(self) -&gt; dict:
-        metadata = self.get_bom().get_metadata()
-        return {
-            &#34;timestamp&#34;: metadata.get_timestamp().isoformat()
-        }</code></pre>
+        bom_metadata = self.get_bom().get_metadata()
+        metadata = {
+            &#34;timestamp&#34;: bom_metadata.get_timestamp().isoformat()
+        }
+
+        if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
+            metadata[&#39;tools&#39;] = []
+            for tool in bom_metadata.get_tools():
+                metadata[&#39;tools&#39;].append({
+                    &#34;vendor&#34;: tool.get_vendor(),
+                    &#34;name&#34;: tool.get_name(),
+                    &#34;version&#34;: tool.get_version()
+                })
+
+        return metadata</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">

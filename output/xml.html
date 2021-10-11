@@ -215,8 +215,24 @@ class Xml(BaseOutput, BaseSchemaVersion):
         return vulnerability_element
 
     def _add_metadata(self, bom: ElementTree.Element) -&gt; ElementTree.Element:
+        bom_metadata = self.get_bom().get_metadata()
+
         metadata_e = ElementTree.SubElement(bom, &#39;metadata&#39;)
-        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = self.get_bom().get_metadata().get_timestamp().isoformat()
+        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = bom_metadata.get_timestamp().isoformat()
+
+        if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
+            tools_e = ElementTree.SubElement(metadata_e, &#39;tools&#39;)
+            for tool in bom_metadata.get_tools():
+                tool_e = ElementTree.SubElement(tools_e, &#39;tool&#39;)
+                ElementTree.SubElement(tool_e, &#39;vendor&#39;).text = tool.get_vendor()
+                ElementTree.SubElement(tool_e, &#39;name&#39;).text = tool.get_name()
+                ElementTree.SubElement(tool_e, &#39;version&#39;).text = tool.get_version()
+                if len(tool.get_hashes()) &gt; 0:
+                    hashes_e = ElementTree.SubElement(tool_e, &#39;hashes&#39;)
+                    for hash in tool.get_hashes():
+                        ElementTree.SubElement(hashes_e, &#39;hash&#39;,
+                                               {&#39;alg&#39;: hash.get_algorithm().value}).text = hash.get_hash_value()
+
         return bom
 
 
@@ -420,8 +436,24 @@ inheritance.</p></div>
         return vulnerability_element
 
     def _add_metadata(self, bom: ElementTree.Element) -&gt; ElementTree.Element:
+        bom_metadata = self.get_bom().get_metadata()
+
         metadata_e = ElementTree.SubElement(bom, &#39;metadata&#39;)
-        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = self.get_bom().get_metadata().get_timestamp().isoformat()
+        ElementTree.SubElement(metadata_e, &#39;timestamp&#39;).text = bom_metadata.get_timestamp().isoformat()
+
+        if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
+            tools_e = ElementTree.SubElement(metadata_e, &#39;tools&#39;)
+            for tool in bom_metadata.get_tools():
+                tool_e = ElementTree.SubElement(tools_e, &#39;tool&#39;)
+                ElementTree.SubElement(tool_e, &#39;vendor&#39;).text = tool.get_vendor()
+                ElementTree.SubElement(tool_e, &#39;name&#39;).text = tool.get_name()
+                ElementTree.SubElement(tool_e, &#39;version&#39;).text = tool.get_version()
+                if len(tool.get_hashes()) &gt; 0:
+                    hashes_e = ElementTree.SubElement(tool_e, &#39;hashes&#39;)
+                    for hash in tool.get_hashes():
+                        ElementTree.SubElement(hashes_e, &#39;hash&#39;,
+                                               {&#39;alg&#39;: hash.get_algorithm().value}).text = hash.get_hash_value()
+
         return bom</code></pre>
 </details>
 <h3>Ancestors</h3>
