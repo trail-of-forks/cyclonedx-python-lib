@@ -117,12 +117,12 @@ class Tool:
 
 
 if sys.version_info &gt;= (3, 8, 0):
-    from importlib.metadata import version
+    from importlib.metadata import version as meta_version
 else:
-    from importlib_metadata import version
+    from importlib_metadata import version as meta_version
 
 try:
-    ThisTool = Tool(vendor=&#39;CycloneDX&#39;, name=&#39;cyclonedx-python-lib&#39;, version=version(&#39;cyclonedx-python-lib&#39;))
+    ThisTool = Tool(vendor=&#39;CycloneDX&#39;, name=&#39;cyclonedx-python-lib&#39;, version=meta_version(&#39;cyclonedx-python-lib&#39;))
 except Exception:
     ThisTool = Tool(vendor=&#39;CycloneDX&#39;, name=&#39;cyclonedx-python-lib&#39;, version=&#39;UNKNOWN&#39;)
 
@@ -140,9 +140,21 @@ class BomMetaData:
 
     def __init__(self, tools: List[Tool] = []):
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
+        self._tools.clear()
         if len(tools) == 0:
             tools.append(ThisTool)
         self._tools = tools
+
+    def add_tool(self, tool: Tool):
+        &#34;&#34;&#34;
+        Add a Tool definition to this Bom Metadata. The `cyclonedx-python-lib` is automatically added - you do not need
+        to add this yourself.
+
+        Args:
+            tool:
+                Instance of `Tool` that represents the tool you are using.
+        &#34;&#34;&#34;
+        self._tools.append(tool)
 
     def get_timestamp(self) -&gt; datetime.datetime:
         &#34;&#34;&#34;
@@ -201,7 +213,7 @@ class Bom:
             New, empty `cyclonedx.model.bom.Bom` instance.
         &#34;&#34;&#34;
         self._uuid = uuid4()
-        self._metadata = BomMetaData()
+        self._metadata = BomMetaData(tools=[])
         self._components.clear()
 
     def add_component(self, component: Component):
@@ -378,7 +390,7 @@ from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#c
             New, empty `cyclonedx.model.bom.Bom` instance.
         &#34;&#34;&#34;
         self._uuid = uuid4()
-        self._metadata = BomMetaData()
+        self._metadata = BomMetaData(tools=[])
         self._components.clear()
 
     def add_component(self, component: Component):
@@ -789,9 +801,21 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 
     def __init__(self, tools: List[Tool] = []):
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
+        self._tools.clear()
         if len(tools) == 0:
             tools.append(ThisTool)
         self._tools = tools
+
+    def add_tool(self, tool: Tool):
+        &#34;&#34;&#34;
+        Add a Tool definition to this Bom Metadata. The `cyclonedx-python-lib` is automatically added - you do not need
+        to add this yourself.
+
+        Args:
+            tool:
+                Instance of `Tool` that represents the tool you are using.
+        &#34;&#34;&#34;
+        self._tools.append(tool)
 
     def get_timestamp(self) -&gt; datetime.datetime:
         &#34;&#34;&#34;
@@ -813,6 +837,31 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="cyclonedx.model.bom.BomMetaData.add_tool"><code class="name flex">
+<span>def <span class="ident">add_tool</span></span>(<span>self, tool: <a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom.Tool">Tool</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add a Tool definition to this Bom Metadata. The <code>cyclonedx-python-lib</code> is automatically added - you do not need
+to add this yourself.</p>
+<h2 id="args">Args</h2>
+<p>tool:
+Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom.Tool">Tool</a></code> that represents the tool you are using.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_tool(self, tool: Tool):
+    &#34;&#34;&#34;
+    Add a Tool definition to this Bom Metadata. The `cyclonedx-python-lib` is automatically added - you do not need
+    to add this yourself.
+
+    Args:
+        tool:
+            Instance of `Tool` that represents the tool you are using.
+    &#34;&#34;&#34;
+    self._tools.append(tool)</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.model.bom.BomMetaData.get_timestamp"><code class="name flex">
 <span>def <span class="ident">get_timestamp</span></span>(<span>self) ‑> datetime.datetime</span>
 </code></dt>
@@ -1054,6 +1103,7 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 <li>
 <h4><code><a title="cyclonedx.model.bom.BomMetaData" href="#cyclonedx.model.bom.BomMetaData">BomMetaData</a></code></h4>
 <ul class="">
+<li><code><a title="cyclonedx.model.bom.BomMetaData.add_tool" href="#cyclonedx.model.bom.BomMetaData.add_tool">add_tool</a></code></li>
 <li><code><a title="cyclonedx.model.bom.BomMetaData.get_timestamp" href="#cyclonedx.model.bom.BomMetaData.get_timestamp">get_timestamp</a></code></li>
 <li><code><a title="cyclonedx.model.bom.BomMetaData.get_tools" href="#cyclonedx.model.bom.BomMetaData.get_tools">get_tools</a></code></li>
 </ul>
