@@ -111,35 +111,22 @@ class Xml(BaseOutput, BaseSchemaVersion):
         if self.component_supports_author() and component.get_author() is not None:
             ElementTree.SubElement(component_element, &#39;author&#39;).text = component.get_author()
 
-        # if publisher and publisher != &#34;UNKNOWN&#34;:
-        #     ElementTree.SubElement(component, &#34;publisher&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, publisher)
-
-        # if name and name != &#34;UNKNOWN&#34;:
+        # name
         ElementTree.SubElement(component_element, &#39;name&#39;).text = component.get_name()
 
-        # if version and version != &#34;UNKNOWN&#34;:
+        # version
         ElementTree.SubElement(component_element, &#39;version&#39;).text = component.get_version()
 
-        # if description and description != &#34;UNKNOWN&#34;:
-        #     ElementTree.SubElement(component, &#34;description&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, description)
-        #
-        # if hashes:
-        #     hashes_elm = ElementTree.SubElement(component, &#34;hashes&#34;)
-        #     for h in hashes:
-        #         ElementTree.SubElement(hashes_elm, &#34;hash&#34;, alg=h.alg).text = h.content
-        #
-        # if len(licenses):
-        #     licenses_elm = ElementTree.SubElement(component, &#34;licenses&#34;)
-        #     for component_license in licenses:
-        #         if component_license.license is not None:
-        #             license_elm = ElementTree.SubElement(licenses_elm, &#34;license&#34;)
-        #             ElementTree.SubElement(license_elm, &#34;name&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;,
-        #             component_license.license.name)
-
-        # if purl:
+        # purl
         ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
 
-        # ElementTree.SubElement(component, &#34;modified&#34;).text = modified if modified else &#34;false&#34;
+        # hashes
+        if len(component.get_hashes()) &gt; 0:
+            hashes_e = ElementTree.SubElement(component_element, &#39;hashes&#39;)
+            for hash in component.get_hashes():
+                ElementTree.SubElement(
+                    hashes_e, &#39;hash&#39;, {&#39;alg&#39;: hash.get_algorithm().value}
+                ).text = hash.get_hash_value()
 
         return component_element
 
@@ -332,35 +319,22 @@ inheritance.</p></div>
         if self.component_supports_author() and component.get_author() is not None:
             ElementTree.SubElement(component_element, &#39;author&#39;).text = component.get_author()
 
-        # if publisher and publisher != &#34;UNKNOWN&#34;:
-        #     ElementTree.SubElement(component, &#34;publisher&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, publisher)
-
-        # if name and name != &#34;UNKNOWN&#34;:
+        # name
         ElementTree.SubElement(component_element, &#39;name&#39;).text = component.get_name()
 
-        # if version and version != &#34;UNKNOWN&#34;:
+        # version
         ElementTree.SubElement(component_element, &#39;version&#39;).text = component.get_version()
 
-        # if description and description != &#34;UNKNOWN&#34;:
-        #     ElementTree.SubElement(component, &#34;description&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;, description)
-        #
-        # if hashes:
-        #     hashes_elm = ElementTree.SubElement(component, &#34;hashes&#34;)
-        #     for h in hashes:
-        #         ElementTree.SubElement(hashes_elm, &#34;hash&#34;, alg=h.alg).text = h.content
-        #
-        # if len(licenses):
-        #     licenses_elm = ElementTree.SubElement(component, &#34;licenses&#34;)
-        #     for component_license in licenses:
-        #         if component_license.license is not None:
-        #             license_elm = ElementTree.SubElement(licenses_elm, &#34;license&#34;)
-        #             ElementTree.SubElement(license_elm, &#34;name&#34;).text = re.sub(RE_XML_ILLEGAL, &#34;?&#34;,
-        #             component_license.license.name)
-
-        # if purl:
+        # purl
         ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
 
-        # ElementTree.SubElement(component, &#34;modified&#34;).text = modified if modified else &#34;false&#34;
+        # hashes
+        if len(component.get_hashes()) &gt; 0:
+            hashes_e = ElementTree.SubElement(component_element, &#39;hashes&#39;)
+            for hash in component.get_hashes():
+                ElementTree.SubElement(
+                    hashes_e, &#39;hash&#39;, {&#39;alg&#39;: hash.get_algorithm().value}
+                ).text = hash.get_hash_value()
 
         return component_element
 

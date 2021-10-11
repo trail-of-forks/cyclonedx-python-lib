@@ -46,12 +46,12 @@
 # Copyright (c) OWASP Foundation. All Rights Reserved.
 
 from enum import Enum
+from os.path import exists
 from packageurl import PackageURL
 from typing import List
 
+from . import HashAlgorithm, HashType, sha1sum
 from .vulnerability import Vulnerability
-
-PURL_TYPE_PREFIX = &#39;pypi&#39;
 
 
 class ComponentType(Enum):
@@ -79,6 +79,7 @@ class Component:
         See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_component
     &#34;&#34;&#34;
     _type: ComponentType
+    _package_url_type: str
     _name: str
     _version: str
     _qualifiers: str
@@ -87,15 +88,57 @@ class Component:
     _description: str = None
     _license: str = None
 
+    _hashes: List[HashType] = []
     _vulnerabilites: List[Vulnerability] = []
 
-    def __init__(self, name: str, version: str, qualifiers: str = None,
-                 component_type: ComponentType = ComponentType.LIBRARY):
+    @staticmethod
+    def for_file(absolute_file_path: str, path_for_bom: str = None):
+        &#34;&#34;&#34;
+        Helper method to create a Component that represents the provided local file as a Component.
+
+        Args:
+            absolute_file_path:
+                Absolute path to the file you wish to represent
+            path_for_bom:
+                Optionally, if supplied this is the path that will be used to identify the file in the BOM
+
+        Returns:
+            `Component` representing the supplied file
+        &#34;&#34;&#34;
+        if not exists(absolute_file_path):
+            raise FileExistsError(&#39;Supplied file path \&#39;{}\&#39; does not exist&#39;.format(absolute_file_path))
+
+        sha1_hash: str = sha1sum(filename=absolute_file_path)
+
+        return Component(
+            name=path_for_bom if path_for_bom else absolute_file_path,
+            version=&#39;0.0.0-{}&#39;.format(sha1_hash[0:12]),
+            hashes=[
+                HashType(algorithm=HashAlgorithm.SHA_1, hash_value=sha1_hash)
+            ],
+            component_type=ComponentType.FILE,
+            package_url_type=&#39;generic&#39;
+        )
+
+    def __init__(self, name: str, version: str, qualifiers: str = None, hashes: List[HashType] = [],
+                 component_type: ComponentType = ComponentType.LIBRARY, package_url_type: str = &#39;pypi&#39;):
         self._name = name
         self._version = version
         self._type = component_type
         self._qualifiers = qualifiers
+        self._hashes = hashes
         self._vulnerabilites = []
+        self._package_url_type = package_url_type
+
+    def add_hash(self, hash: HashType):
+        &#34;&#34;&#34;
+        Adds a hash that pins/identifies this Component.
+
+        Args:
+            hash:
+                `HashType` instance
+        &#34;&#34;&#34;
+        self._hashes.append(hash)
 
     def add_vulnerability(self, vulnerability: Vulnerability):
         &#34;&#34;&#34;
@@ -128,6 +171,15 @@ class Component:
         &#34;&#34;&#34;
         return self._description
 
+    def get_hashes(self) -&gt; List[HashType]:
+        &#34;&#34;&#34;
+        List of cryptographic hashes that identify this Component.
+
+        Returns:
+            `List` of `HashType` objects where there are any hashes, else an empty `List`.
+        &#34;&#34;&#34;
+        return self._hashes
+
     def get_license(self) -&gt; str:
         &#34;&#34;&#34;
         Get the license of this Component.
@@ -153,7 +205,7 @@ class Component:
         Returns:
             PackageURL that reflects this Component as `str`.
         &#34;&#34;&#34;
-        base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
+        base_purl = &#39;pkg:{}/{}@{}&#39;.format(self._package_url_type, self._name, self._version)
         if self._qualifiers:
             base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
         return base_purl
@@ -241,7 +293,7 @@ class Component:
             `packageurl.PackageURL` instance which represents this Component.
         &#34;&#34;&#34;&#34;&#34;
         return PackageURL(
-            type=PURL_TYPE_PREFIX,
+            type=self._package_url_type,
             name=self._name,
             version=self._version,
             qualifiers=self._qualifiers
@@ -265,7 +317,7 @@ class Component:
 <dl>
 <dt id="cyclonedx.model.component.Component"><code class="flex name class">
 <span>class <span class="ident">Component</span></span>
-<span>(</span><span>name: str, version: str, qualifiers: str = None, component_type: <a title="cyclonedx.model.component.ComponentType" href="#cyclonedx.model.component.ComponentType">ComponentType</a> = ComponentType.LIBRARY)</span>
+<span>(</span><span>name: str, version: str, qualifiers: str = None, hashes: List[<a title="cyclonedx.model.HashType" href="index.html#cyclonedx.model.HashType">HashType</a>] = [], component_type: <a title="cyclonedx.model.component.ComponentType" href="#cyclonedx.model.component.ComponentType">ComponentType</a> = ComponentType.LIBRARY, package_url_type: str = 'pypi')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This is our internal representation of a Component within a Bom.</p>
@@ -285,6 +337,7 @@ class Component:
         See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_component
     &#34;&#34;&#34;
     _type: ComponentType
+    _package_url_type: str
     _name: str
     _version: str
     _qualifiers: str
@@ -293,15 +346,57 @@ class Component:
     _description: str = None
     _license: str = None
 
+    _hashes: List[HashType] = []
     _vulnerabilites: List[Vulnerability] = []
 
-    def __init__(self, name: str, version: str, qualifiers: str = None,
-                 component_type: ComponentType = ComponentType.LIBRARY):
+    @staticmethod
+    def for_file(absolute_file_path: str, path_for_bom: str = None):
+        &#34;&#34;&#34;
+        Helper method to create a Component that represents the provided local file as a Component.
+
+        Args:
+            absolute_file_path:
+                Absolute path to the file you wish to represent
+            path_for_bom:
+                Optionally, if supplied this is the path that will be used to identify the file in the BOM
+
+        Returns:
+            `Component` representing the supplied file
+        &#34;&#34;&#34;
+        if not exists(absolute_file_path):
+            raise FileExistsError(&#39;Supplied file path \&#39;{}\&#39; does not exist&#39;.format(absolute_file_path))
+
+        sha1_hash: str = sha1sum(filename=absolute_file_path)
+
+        return Component(
+            name=path_for_bom if path_for_bom else absolute_file_path,
+            version=&#39;0.0.0-{}&#39;.format(sha1_hash[0:12]),
+            hashes=[
+                HashType(algorithm=HashAlgorithm.SHA_1, hash_value=sha1_hash)
+            ],
+            component_type=ComponentType.FILE,
+            package_url_type=&#39;generic&#39;
+        )
+
+    def __init__(self, name: str, version: str, qualifiers: str = None, hashes: List[HashType] = [],
+                 component_type: ComponentType = ComponentType.LIBRARY, package_url_type: str = &#39;pypi&#39;):
         self._name = name
         self._version = version
         self._type = component_type
         self._qualifiers = qualifiers
+        self._hashes = hashes
         self._vulnerabilites = []
+        self._package_url_type = package_url_type
+
+    def add_hash(self, hash: HashType):
+        &#34;&#34;&#34;
+        Adds a hash that pins/identifies this Component.
+
+        Args:
+            hash:
+                `HashType` instance
+        &#34;&#34;&#34;
+        self._hashes.append(hash)
 
     def add_vulnerability(self, vulnerability: Vulnerability):
         &#34;&#34;&#34;
@@ -334,6 +429,15 @@ class Component:
         &#34;&#34;&#34;
         return self._description
 
+    def get_hashes(self) -&gt; List[HashType]:
+        &#34;&#34;&#34;
+        List of cryptographic hashes that identify this Component.
+
+        Returns:
+            `List` of `HashType` objects where there are any hashes, else an empty `List`.
+        &#34;&#34;&#34;
+        return self._hashes
+
     def get_license(self) -&gt; str:
         &#34;&#34;&#34;
         Get the license of this Component.
@@ -359,7 +463,7 @@ class Component:
         Returns:
             PackageURL that reflects this Component as `str`.
         &#34;&#34;&#34;
-        base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
+        base_purl = &#39;pkg:{}/{}@{}&#39;.format(self._package_url_type, self._name, self._version)
         if self._qualifiers:
             base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
         return base_purl
@@ -447,7 +551,7 @@ class Component:
             `packageurl.PackageURL` instance which represents this Component.
         &#34;&#34;&#34;&#34;&#34;
         return PackageURL(
-            type=PURL_TYPE_PREFIX,
+            type=self._package_url_type,
             name=self._name,
             version=self._version,
             qualifiers=self._qualifiers
@@ -459,8 +563,80 @@ class Component:
     def __repr__(self):
         return &#39;&lt;Component {}={}&gt;&#39;.format(self._name, self._version)</code></pre>
 </details>
+<h3>Static methods</h3>
+<dl>
+<dt id="cyclonedx.model.component.Component.for_file"><code class="name flex">
+<span>def <span class="ident">for_file</span></span>(<span>absolute_file_path: str, path_for_bom: str = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper method to create a Component that represents the provided local file as a Component.</p>
+<h2 id="args">Args</h2>
+<p>absolute_file_path:
+Absolute path to the file you wish to represent
+path_for_bom:
+Optionally, if supplied this is the path that will be used to identify the file in the BOM</p>
+<h2 id="returns">Returns</h2>
+<p><code><a title="cyclonedx.model.component.Component" href="#cyclonedx.model.component.Component">Component</a></code> representing the supplied file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def for_file(absolute_file_path: str, path_for_bom: str = None):
+    &#34;&#34;&#34;
+    Helper method to create a Component that represents the provided local file as a Component.
+
+    Args:
+        absolute_file_path:
+            Absolute path to the file you wish to represent
+        path_for_bom:
+            Optionally, if supplied this is the path that will be used to identify the file in the BOM
+
+    Returns:
+        `Component` representing the supplied file
+    &#34;&#34;&#34;
+    if not exists(absolute_file_path):
+        raise FileExistsError(&#39;Supplied file path \&#39;{}\&#39; does not exist&#39;.format(absolute_file_path))
+
+    sha1_hash: str = sha1sum(filename=absolute_file_path)
+
+    return Component(
+        name=path_for_bom if path_for_bom else absolute_file_path,
+        version=&#39;0.0.0-{}&#39;.format(sha1_hash[0:12]),
+        hashes=[
+            HashType(algorithm=HashAlgorithm.SHA_1, hash_value=sha1_hash)
+        ],
+        component_type=ComponentType.FILE,
+        package_url_type=&#39;generic&#39;
+    )</code></pre>
+</details>
+</dd>
+</dl>
 <h3>Methods</h3>
 <dl>
+<dt id="cyclonedx.model.component.Component.add_hash"><code class="name flex">
+<span>def <span class="ident">add_hash</span></span>(<span>self, hash: <a title="cyclonedx.model.HashType" href="index.html#cyclonedx.model.HashType">HashType</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a hash that pins/identifies this Component.</p>
+<h2 id="args">Args</h2>
+<p>hash:
+<code>HashType</code> instance</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_hash(self, hash: HashType):
+    &#34;&#34;&#34;
+    Adds a hash that pins/identifies this Component.
+
+    Args:
+        hash:
+            `HashType` instance
+    &#34;&#34;&#34;
+    self._hashes.append(hash)</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.model.component.Component.add_vulnerability"><code class="name flex">
 <span>def <span class="ident">add_vulnerability</span></span>(<span>self, vulnerability: <a title="cyclonedx.model.vulnerability.Vulnerability" href="vulnerability.html#cyclonedx.model.vulnerability.Vulnerability">Vulnerability</a>)</span>
 </code></dt>
@@ -531,6 +707,27 @@ class Component:
     return self._description</code></pre>
 </details>
 </dd>
+<dt id="cyclonedx.model.component.Component.get_hashes"><code class="name flex">
+<span>def <span class="ident">get_hashes</span></span>(<span>self) ‑> List[<a title="cyclonedx.model.HashType" href="index.html#cyclonedx.model.HashType">HashType</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>List of cryptographic hashes that identify this Component.</p>
+<h2 id="returns">Returns</h2>
+<p><code>List</code> of <code>HashType</code> objects where there are any hashes, else an empty <code>List</code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_hashes(self) -&gt; List[HashType]:
+    &#34;&#34;&#34;
+    List of cryptographic hashes that identify this Component.
+
+    Returns:
+        `List` of `HashType` objects where there are any hashes, else an empty `List`.
+    &#34;&#34;&#34;
+    return self._hashes</code></pre>
+</details>
+</dd>
 <dt id="cyclonedx.model.component.Component.get_license"><code class="name flex">
 <span>def <span class="ident">get_license</span></span>(<span>self) ‑> str</span>
 </code></dt>
@@ -591,7 +788,7 @@ class Component:
     Returns:
         PackageURL that reflects this Component as `str`.
     &#34;&#34;&#34;
-    base_purl = &#39;pkg:{}/{}@{}&#39;.format(PURL_TYPE_PREFIX, self._name, self._version)
+    base_purl = &#39;pkg:{}/{}@{}&#39;.format(self._package_url_type, self._name, self._version)
     if self._qualifiers:
         base_purl = &#39;{}?{}&#39;.format(base_purl, self._qualifiers)
     return base_purl</code></pre>
@@ -784,7 +981,7 @@ class Component:
         `packageurl.PackageURL` instance which represents this Component.
     &#34;&#34;&#34;&#34;&#34;
     return PackageURL(
-        type=PURL_TYPE_PREFIX,
+        type=self._package_url_type,
         name=self._name,
         version=self._version,
         qualifiers=self._qualifiers
@@ -882,9 +1079,12 @@ class Component:
 <li>
 <h4><code><a title="cyclonedx.model.component.Component" href="#cyclonedx.model.component.Component">Component</a></code></h4>
 <ul class="two-column">
+<li><code><a title="cyclonedx.model.component.Component.add_hash" href="#cyclonedx.model.component.Component.add_hash">add_hash</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.add_vulnerability" href="#cyclonedx.model.component.Component.add_vulnerability">add_vulnerability</a></code></li>
+<li><code><a title="cyclonedx.model.component.Component.for_file" href="#cyclonedx.model.component.Component.for_file">for_file</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.get_author" href="#cyclonedx.model.component.Component.get_author">get_author</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.get_description" href="#cyclonedx.model.component.Component.get_description">get_description</a></code></li>
+<li><code><a title="cyclonedx.model.component.Component.get_hashes" href="#cyclonedx.model.component.Component.get_hashes">get_hashes</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.get_license" href="#cyclonedx.model.component.Component.get_license">get_license</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.get_name" href="#cyclonedx.model.component.Component.get_name">get_name</a></code></li>
 <li><code><a title="cyclonedx.model.component.Component.get_purl" href="#cyclonedx.model.component.Component.get_purl">get_purl</a></code></li>

@@ -43,6 +43,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+import hashlib
 from enum import Enum
 
 &#34;&#34;&#34;
@@ -51,6 +52,16 @@ Uniform set of models to represent objects within a CycloneDX software bill-of-m
 You can either create a `cyclonedx.model.bom.Bom` yourself programmatically, or generate a `cyclonedx.model.bom.Bom`
 from a `cyclonedx.parser.BaseParser` implementation.
 &#34;&#34;&#34;
+
+
+def sha1sum(filename: str) -&gt; str:
+    h = hashlib.sha1()
+    b = bytearray(128 * 1024)
+    mv = memoryview(b)
+    with open(filename, &#39;rb&#39;, buffering=0) as f:
+        for n in iter(lambda: f.readinto(mv), 0):
+            h.update(mv[:n])
+    return h.hexdigest()
 
 
 class HashAlgorithm(Enum):
@@ -117,6 +128,28 @@ class HashType:
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="cyclonedx.model.sha1sum"><code class="name flex">
+<span>def <span class="ident">sha1sum</span></span>(<span>filename: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sha1sum(filename: str) -&gt; str:
+    h = hashlib.sha1()
+    b = bytearray(128 * 1024)
+    mv = memoryview(b)
+    with open(filename, &#39;rb&#39;, buffering=0) as f:
+        for n in iter(lambda: f.readinto(mv), 0):
+            h.update(mv[:n])
+    return h.hexdigest()</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
@@ -296,6 +329,11 @@ class HashType:
 <li><code><a title="cyclonedx.model.bom" href="bom.html">cyclonedx.model.bom</a></code></li>
 <li><code><a title="cyclonedx.model.component" href="component.html">cyclonedx.model.component</a></code></li>
 <li><code><a title="cyclonedx.model.vulnerability" href="vulnerability.html">cyclonedx.model.vulnerability</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="cyclonedx.model.sha1sum" href="#cyclonedx.model.sha1sum">sha1sum</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

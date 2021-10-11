@@ -81,6 +81,15 @@ class Json(BaseOutput, BaseSchemaVersion):
             &#34;purl&#34;: component.get_purl()
         }
 
+        if len(component.get_hashes()) &gt; 0:
+            hashes = []
+            for component_hash in component.get_hashes():
+                hashes.append({
+                    &#34;alg&#34;: component_hash.get_algorithm().value,
+                    &#34;content&#34;: component_hash.get_hash_value()
+                })
+            c[&#39;hashes&#39;] = hashes
+
         if self.component_supports_author() and component.get_author() is not None:
             c[&#39;author&#39;] = component.get_author()
 
@@ -95,11 +104,22 @@ class Json(BaseOutput, BaseSchemaVersion):
         if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
             metadata[&#39;tools&#39;] = []
             for tool in bom_metadata.get_tools():
-                metadata[&#39;tools&#39;].append({
+                tool_dict = {
                     &#34;vendor&#34;: tool.get_vendor(),
                     &#34;name&#34;: tool.get_name(),
                     &#34;version&#34;: tool.get_version()
-                })
+                }
+
+                if len(tool.get_hashes()) &gt; 0:
+                    hashes = []
+                    for tool_hash in tool.get_hashes():
+                        hashes.append({
+                            &#34;alg&#34;: tool_hash.get_algorithm().value,
+                            &#34;content&#34;: tool_hash.get_hash_value()
+                        })
+                    tool_dict[&#39;hashes&#39;] = hashes
+
+                metadata[&#39;tools&#39;].append(tool_dict)
 
         return metadata
 
@@ -169,6 +189,15 @@ inheritance.</p></div>
             &#34;purl&#34;: component.get_purl()
         }
 
+        if len(component.get_hashes()) &gt; 0:
+            hashes = []
+            for component_hash in component.get_hashes():
+                hashes.append({
+                    &#34;alg&#34;: component_hash.get_algorithm().value,
+                    &#34;content&#34;: component_hash.get_hash_value()
+                })
+            c[&#39;hashes&#39;] = hashes
+
         if self.component_supports_author() and component.get_author() is not None:
             c[&#39;author&#39;] = component.get_author()
 
@@ -183,11 +212,22 @@ inheritance.</p></div>
         if self.bom_metadata_supports_tools() and len(bom_metadata.get_tools()) &gt; 0:
             metadata[&#39;tools&#39;] = []
             for tool in bom_metadata.get_tools():
-                metadata[&#39;tools&#39;].append({
+                tool_dict = {
                     &#34;vendor&#34;: tool.get_vendor(),
                     &#34;name&#34;: tool.get_name(),
                     &#34;version&#34;: tool.get_version()
-                })
+                }
+
+                if len(tool.get_hashes()) &gt; 0:
+                    hashes = []
+                    for tool_hash in tool.get_hashes():
+                        hashes.append({
+                            &#34;alg&#34;: tool_hash.get_algorithm().value,
+                            &#34;content&#34;: tool_hash.get_hash_value()
+                        })
+                    tool_dict[&#39;hashes&#39;] = hashes
+
+                metadata[&#39;tools&#39;].append(tool_dict)
 
         return metadata</code></pre>
 </details>
