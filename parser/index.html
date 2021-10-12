@@ -10,10 +10,19 @@
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
 <style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;#max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}#content table thead tr th{border-bottom:1px solid black;padding:0 10px}#content table tbody tr td{padding:0 10px}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<link rel="preconnect" href="https://www.google.com">
+<script async src="https://cse.google.com/cse.js?cx=017837193012385208679:pey8ky8gdqw"></script>
+<style>
+.gsc-control-cse {padding:0 !important;margin-top:1em}
+body.gsc-overflow-hidden #sidebar {overflow: visible;}
+</style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<style>.homelink{display:block;font-size:2em;font-weight:bold;color:#555;padding-bottom:.5em;border-bottom:1px solid silver}.homelink:hover{color:inherit}.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
+<link rel="canonical" href="https://cyclonedx.github.io/cyclonedx-python-lib/cyclonedx/parser/">
+<link rel="icon" href="https://cyclonedx.org/theme/assets/images/layout/logo.svg">
 </head>
 <body>
 <main>
@@ -24,9 +33,182 @@
 <section id="section-intro">
 <p>Set of classes and methods which allow for quick creation of a Bom instance from your environment or Python project.</p>
 <p>Use a Parser instead of programmatically creating a Bom as a developer.</p>
+<p>Different parsers support population of different information about your dependencies due to how information is
+obtained and limitations of what information is available to each Parser. The table below explains coverage as to what
+information is obtained by each set of Parsers. It does NOT guarantee the information is output in the resulting
+CycloneDX BOM document.</p>
+<table>
+<thead>
+<tr>
+<th>Data Path</th>
+<th>Environment</th>
+<th>Pipenv</th>
+<th>Poetry</th>
+<th>Requirements</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.supplier</code></td>
+<td>N (if in package METADATA)</td>
+<td>N/A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>component.author</code></td>
+<td>Y (if in package METADATA)</td>
+<td>N/A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>component.publisher</code></td>
+<td>N (if in package METADATA)</td>
+<td>N/A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>component.group</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>component.name</code></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td><code>component.version</code></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td><code>component.description</code></td>
+<td>N</td>
+<td>N/A</td>
+<td>N</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.scope</code></td>
+<td>N</td>
+<td>N/A</td>
+<td>N</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.hashes</code></td>
+<td>N/A</td>
+<td>Y - see below (1)</td>
+<td>Y - see below (1)</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.licenses</code></td>
+<td>Y (if in package METADATA)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.copyright</code></td>
+<td>N (if in package METADATA)</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.cpe</code></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+</tr>
+<tr>
+<td><code>component.purl</code></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td><code>component.swid</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.modified</code></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+<td><em>Deprecated</em></td>
+</tr>
+<tr>
+<td><code>component.pedigree</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.externalReferences</code></td>
+<td>N/A</td>
+<td>Y - see below (1)</td>
+<td>Y - see below (1)</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.properties</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.components</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>component.evidence</code></td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend:</strong></p>
+<ul>
+<li><code>Y</code>: YES with any caveat states.</li>
+<li><code>N</code>: Not currently supported, but support believed to be possible.</li>
+<li><code>N/A</code>: Not supported and not deemed possible (i.e. the Parser would never be able to reliably determine this info).</li>
+<li><code>-</code>: Deemed not applicable to the Python ecosystem.</li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ol>
+<li>Python packages are regularly available as both <code>.whl</code> and <code>.tar.gz</code> packages. This means for that for a given
+package and version multiple artefacts are possible - which would mean multiple hashes are possible. CycloneDX
+supports only a single set of hashes identifying a single artefact at <code>component.hashes</code>. To cater for this
+situation in Python, we add the hashes to <code>component.externalReferences</code>, as we cannot determine which package was
+actually obtained and installed to meet a given dependency.</li>
+</ol>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L1-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -48,6 +230,50 @@
 Set of classes and methods which allow for quick creation of a Bom instance from your environment or Python project.
 
 Use a Parser instead of programmatically creating a Bom as a developer.
+
+Different parsers support population of different information about your dependencies due to how information is
+obtained and limitations of what information is available to each Parser. The table below explains coverage as to what
+information is obtained by each set of Parsers. It does NOT guarantee the information is output in the resulting
+CycloneDX BOM document.
+
+| Data Path | Environment | Pipenv | Poetry | Requirements |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| `component.supplier` | N (if in package METADATA) | N/A | | |
+| `component.author` | Y (if in package METADATA) | N/A | | |
+| `component.publisher` | N (if in package METADATA) | N/A | | |
+| `component.group` | - | - | - | - |
+| `component.name` | Y | Y | Y | Y |
+| `component.version` | Y | Y | Y | Y |
+| `component.description` | N | N/A | N | N/A |
+| `component.scope` | N | N/A | N | N/A |
+| `component.hashes` | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| `component.licenses` | Y (if in package METADATA) | N/A | N/A | N/A |
+| `component.copyright` | N (if in package METADATA) | N/A | N/A | N/A |
+| `component.cpe` | _Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
+| `component.purl` | Y | Y | Y | Y |
+| `component.swid` | N/A | N/A | N/A | N/A |
+| `component.modified` | _Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
+| `component.pedigree` | N/A | N/A | N/A | N/A |
+| `component.externalReferences` | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| `component.properties` | N/A | N/A | N/A | N/A |
+| `component.components` | N/A | N/A | N/A | N/A |
+| `component.evidence` | N/A | N/A | N/A | N/A |
+
+**Legend:**
+
+* `Y`: YES with any caveat states.
+* `N`: Not currently supported, but support believed to be possible.
+* `N/A`: Not supported and not deemed possible (i.e. the Parser would never be able to reliably determine this info).
+* `-`: Deemed not applicable to the Python ecosystem.
+
+**Notes:**
+
+1. Python packages are regularly available as both `.whl` and `.tar.gz` packages. This means for that for a given
+    package and version multiple artefacts are possible - which would mean multiple hashes are possible. CycloneDX
+    supports only a single set of hashes identifying a single artefact at `component.hashes`. To cater for this
+    situation in Python, we add the hashes to `component.externalReferences`, as we cannot determine which package was
+    actually obtained and installed to meet a given dependency.
+
 &#34;&#34;&#34;
 
 from abc import ABC
@@ -100,7 +326,7 @@ class BaseParser(ABC):
 <dl>
 <dt><code class="name"><a title="cyclonedx.parser.environment" href="environment.html">cyclonedx.parser.environment</a></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Parser classes for reading installed packages in your current Python environment …</p></div>
 </dd>
 <dt><code class="name"><a title="cyclonedx.parser.pipenv" href="pipenv.html">cyclonedx.parser.pipenv</a></code></dt>
 <dd>
@@ -132,6 +358,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L91-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class BaseParser(ABC):
     _components: List[Component] = []
@@ -174,6 +401,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L99-L100" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_count(self) -&gt; int:
     return len(self._components)</code></pre>
@@ -187,6 +415,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L102-L103" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_components(self) -&gt; List[Component]:
     return self._components</code></pre>
@@ -200,6 +429,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L105-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warnings(self) -&gt; List[ParserWarning]:
     return self._warnings</code></pre>
@@ -213,6 +443,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L108-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def has_warnings(self) -&gt; bool:
     return len(self._warnings) &gt; 0</code></pre>
@@ -229,6 +460,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L73-L88" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ParserWarning:
     _item: str
@@ -257,6 +489,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L81-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_item(self) -&gt; str:
     return self._item</code></pre>
@@ -270,6 +503,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
+<a href="https://github.com/cyclonedx-python-lib/blob/bdee0ea277d9f378b3a5e225c2ac3d8e20e2c53c/cyclonedx/parser/__init__.py#L84-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warning_message(self) -&gt; str:
     return self._warning</code></pre>
@@ -281,6 +515,15 @@ inheritance.</p></div>
 </section>
 </article>
 <nav id="sidebar">
+<header>
+<a class="homelink" rel="home" title="cyclonedx-python-lib docs Home" href="https://cyclonedx.github.io/cyclonedx-python-lib/">
+<img src="https://cyclonedx.org/theme/assets/images/layout/logo.svg" alt=""> cyclonedx-python-lib
+</a>
+</header>
+<div class="gcse-search" style="height: 70px"
+data-as_oq="site:cyclonedx.github.io inurl:github.com/cyclonedx/cyclonedx-python-lib"
+data-gaCategoryParameter="cyclonedx.parser">
+</div>
 <h1>Index</h1>
 <div class="toc">
 <ul></ul>
