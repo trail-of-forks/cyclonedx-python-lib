@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L1-L134" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L1-L137" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -90,6 +90,9 @@ class Json(BaseOutput, BaseSchemaVersion):
             &#34;version&#34;: component.get_version(),
             &#34;purl&#34;: component.get_purl()
         }
+
+        if component.get_namespace():
+            c[&#39;group&#39;] = component.get_namespace()
 
         if component.get_hashes():
             hashes = []
@@ -191,7 +194,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L27-L118" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L27-L121" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Json(BaseOutput, BaseSchemaVersion):
 
@@ -221,6 +224,9 @@ inheritance.</p></div>
             &#34;version&#34;: component.get_version(),
             &#34;purl&#34;: component.get_purl()
         }
+
+        if component.get_namespace():
+            c[&#39;group&#39;] = component.get_namespace()
 
         if component.get_hashes():
             hashes = []
@@ -309,7 +315,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L29-L30" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L29-L30" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def output_as_string(self) -&gt; str:
     return json.dumps(self._get_json())</code></pre>
@@ -327,7 +333,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L121-L122" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L124-L125" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot0(Json, SchemaVersion1Dot0):
     pass</code></pre>
@@ -351,7 +357,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L125-L126" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L128-L129" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot1(Json, SchemaVersion1Dot1):
     pass</code></pre>
@@ -375,7 +381,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L129-L130" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L132-L133" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot2(Json, SchemaVersion1Dot2):
     pass</code></pre>
@@ -399,7 +405,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/970d19202d13d4becbbf040b3a9fb115dd7a0795/cyclonedx/output/json.py#L133-L134" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/output/json.py#L136-L137" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot3(Json, SchemaVersion1Dot3):
     pass</code></pre>
