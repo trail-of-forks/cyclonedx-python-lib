@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L1-L206" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L1-L212" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -66,6 +66,16 @@ from a `cyclonedx.parser.BaseParser` implementation.
 
 
 def sha1sum(filename: str) -&gt; str:
+    &#34;&#34;&#34;
+    Generate a SHA1 hash of the provided file.
+
+    Args:
+        filename:
+            Absolute path to file to hash as `str`
+
+    Returns:
+        SHA-1 hash
+    &#34;&#34;&#34;
     h = hashlib.sha1()
     b = bytearray(128 * 1024)
     mv = memoryview(b)
@@ -105,9 +115,6 @@ class HashType:
         See the CycloneDX Schema for hashType: https://cyclonedx.org/docs/1.3/#type_hashType
     &#34;&#34;&#34;
 
-    _algorithm: HashAlgorithm
-    _value: str
-
     @staticmethod
     def from_composite_str(composite_hash: str):
         &#34;&#34;&#34;
@@ -122,7 +129,7 @@ class HashType:
         Returns:
             An instance of `HashType` when possible, else `None`.
         &#34;&#34;&#34;
-        algorithm: HashAlgorithm = None
+        algorithm = None
         parts = composite_hash.split(&#39;:&#39;)
 
         algorithm_prefix = parts[0].lower()
@@ -147,6 +154,9 @@ class HashType:
 
     def get_hash_value(self) -&gt; str:
         return self._value
+
+    def __repr__(self):
+        return f&#39;&lt;Hash {self._algorithm.value}:{self._value}&gt;&#39;
 
 
 class ExternalReferenceType(Enum):
@@ -182,20 +192,13 @@ class ExternalReference:
     .. note::
         See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_externalReference
     &#34;&#34;&#34;
-    _reference_type: ExternalReferenceType
-    _url: str
-    _comment: str
-    _hashes: List[HashType] = []
 
     def __init__(self, reference_type: ExternalReferenceType, url: str, comment: str = None,
                  hashes: List[HashType] = None):
-        self._reference_type = reference_type
+        self._reference_type: ExternalReferenceType = reference_type
         self._url = url
         self._comment = comment
-        if not hashes:
-            self._hashes.clear()
-        else:
-            self._hashes = hashes
+        self._hashes: List[HashType] = hashes if hashes else []
 
     def add_hash(self, our_hash: HashType):
         &#34;&#34;&#34;
@@ -241,7 +244,10 @@ class ExternalReference:
         Returns:
             URI as a `str`.
         &#34;&#34;&#34;
-        return self._url</code></pre>
+        return self._url
+
+    def __repr__(self):
+        return f&#39;&lt;ExternalReference {self._reference_type.name}, {self._url}&gt; {self._hashes}&#39;</code></pre>
 </details>
 </section>
 <section>
@@ -270,13 +276,28 @@ class ExternalReference:
 <span>def <span class="ident">sha1sum</span></span>(<span>filename: str) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Generate a SHA1 hash of the provided file.</p>
+<h2 id="args">Args</h2>
+<p>filename:
+Absolute path to file to hash as <code>str</code></p>
+<h2 id="returns">Returns</h2>
+<p>SHA-1 hash</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L30-L37" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L30-L47" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def sha1sum(filename: str) -&gt; str:
+    &#34;&#34;&#34;
+    Generate a SHA1 hash of the provided file.
+
+    Args:
+        filename:
+            Absolute path to file to hash as `str`
+
+    Returns:
+        SHA-1 hash
+    &#34;&#34;&#34;
     h = hashlib.sha1()
     b = bytearray(128 * 1024)
     mv = memoryview(b)
@@ -305,7 +326,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L139-L206" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L149-L212" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ExternalReference:
     &#34;&#34;&#34;
@@ -315,20 +336,13 @@ a CycloneDX BOM document.</p>
     .. note::
         See the CycloneDX Schema definition: https://cyclonedx.org/docs/1.3/#type_externalReference
     &#34;&#34;&#34;
-    _reference_type: ExternalReferenceType
-    _url: str
-    _comment: str
-    _hashes: List[HashType] = []
 
     def __init__(self, reference_type: ExternalReferenceType, url: str, comment: str = None,
                  hashes: List[HashType] = None):
-        self._reference_type = reference_type
+        self._reference_type: ExternalReferenceType = reference_type
         self._url = url
         self._comment = comment
-        if not hashes:
-            self._hashes.clear()
-        else:
-            self._hashes = hashes
+        self._hashes: List[HashType] = hashes if hashes else []
 
     def add_hash(self, our_hash: HashType):
         &#34;&#34;&#34;
@@ -374,7 +388,10 @@ a CycloneDX BOM document.</p>
         Returns:
             URI as a `str`.
         &#34;&#34;&#34;
-        return self._url</code></pre>
+        return self._url
+
+    def __repr__(self):
+        return f&#39;&lt;ExternalReference {self._reference_type.name}, {self._url}&gt; {self._hashes}&#39;</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -389,7 +406,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L162-L170" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L165-L173" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_hash(self, our_hash: HashType):
     &#34;&#34;&#34;
@@ -412,7 +429,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L172-L179" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L175-L182" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_comment(self) -&gt; Union[str, None]:
     &#34;&#34;&#34;
@@ -434,7 +451,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L181-L188" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L184-L191" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_hashes(self) -&gt; List[HashType]:
     &#34;&#34;&#34;
@@ -456,7 +473,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L190-L197" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L193-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_reference_type(self) -&gt; ExternalReferenceType:
     &#34;&#34;&#34;
@@ -478,7 +495,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L199-L206" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L202-L209" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_url(self) -&gt; str:
     &#34;&#34;&#34;
@@ -505,7 +522,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L114-L136" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L124-L146" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ExternalReferenceType(Enum):
     &#34;&#34;&#34;
@@ -616,7 +633,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L40-L59" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L50-L69" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class HashAlgorithm(Enum):
     &#34;&#34;&#34;
@@ -708,7 +725,7 @@ a CycloneDX BOM document.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L62-L111" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L72-L121" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class HashType:
     &#34;&#34;&#34;
@@ -717,9 +734,6 @@ a CycloneDX BOM document.</p>
     .. note::
         See the CycloneDX Schema for hashType: https://cyclonedx.org/docs/1.3/#type_hashType
     &#34;&#34;&#34;
-
-    _algorithm: HashAlgorithm
-    _value: str
 
     @staticmethod
     def from_composite_str(composite_hash: str):
@@ -735,7 +749,7 @@ a CycloneDX BOM document.</p>
         Returns:
             An instance of `HashType` when possible, else `None`.
         &#34;&#34;&#34;
-        algorithm: HashAlgorithm = None
+        algorithm = None
         parts = composite_hash.split(&#39;:&#39;)
 
         algorithm_prefix = parts[0].lower()
@@ -759,7 +773,10 @@ a CycloneDX BOM document.</p>
         return self._algorithm
 
     def get_hash_value(self) -&gt; str:
-        return self._value</code></pre>
+        return self._value
+
+    def __repr__(self):
+        return f&#39;&lt;Hash {self._algorithm.value}:{self._value}&gt;&#39;</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -778,7 +795,7 @@ Example: <code>sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779ca
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L73-L101" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L80-L108" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@staticmethod
 def from_composite_str(composite_hash: str):
@@ -794,7 +811,7 @@ def from_composite_str(composite_hash: str):
     Returns:
         An instance of `HashType` when possible, else `None`.
     &#34;&#34;&#34;
-    algorithm: HashAlgorithm = None
+    algorithm = None
     parts = composite_hash.split(&#39;:&#39;)
 
     algorithm_prefix = parts[0].lower()
@@ -822,7 +839,7 @@ def from_composite_str(composite_hash: str):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L107-L108" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L114-L115" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_algorithm(self) -&gt; HashAlgorithm:
     return self._algorithm</code></pre>
@@ -836,7 +853,7 @@ def from_composite_str(composite_hash: str):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/__init__.py#L110-L111" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/__init__.py#L117-L118" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_hash_value(self) -&gt; str:
     return self._value</code></pre>

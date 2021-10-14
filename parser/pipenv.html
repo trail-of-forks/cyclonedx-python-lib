@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/parser/pipenv.py#L1-L57" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/parser/pipenv.py#L1-L59" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -73,16 +73,18 @@ class PipEnvParser(BaseParser):
                 name=package_name, version=str(package_data[&#39;version&#39;]).strip(&#39;=&#39;),
             )
 
-            if package_data[&#39;index&#39;] == &#39;pypi&#39;:
+            if &#39;index&#39; in package_data.keys() and package_data[&#39;index&#39;] == &#39;pypi&#39;:
                 # Add download location with hashes stored in Pipfile.lock
-                for pip_hash in package_data[&#39;hashes&#39;]:
-                    ext_ref = ExternalReference(
-                        reference_type=ExternalReferenceType.DISTRIBUTION,
-                        url=c.get_pypi_url(),
-                        comment=&#39;Distribution available from pypi.org&#39;
-                    )
-                    ext_ref.add_hash(HashType.from_composite_str(pip_hash))
-                    c.add_external_reference(ext_ref)
+                if &#39;hashes&#39; in package_data.keys():
+                    for pip_hash in package_data[&#39;hashes&#39;]:
+
+                        ext_ref = ExternalReference(
+                            reference_type=ExternalReferenceType.DISTRIBUTION,
+                            url=c.get_pypi_url(),
+                            comment=&#39;Distribution available from pypi.org&#39;
+                        )
+                        ext_ref.add_hash(HashType.from_composite_str(pip_hash))
+                        c.add_external_reference(ext_ref)
 
             self._components.append(c)
 
@@ -114,7 +116,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/parser/pipenv.py#L52-L57" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/parser/pipenv.py#L54-L59" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class PipEnvFileParser(PipEnvParser):
 
@@ -140,7 +142,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/parser/pipenv.py#L26-L49" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/parser/pipenv.py#L26-L51" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class PipEnvParser(BaseParser):
 
@@ -154,16 +156,18 @@ inheritance.</p></div>
                 name=package_name, version=str(package_data[&#39;version&#39;]).strip(&#39;=&#39;),
             )
 
-            if package_data[&#39;index&#39;] == &#39;pypi&#39;:
+            if &#39;index&#39; in package_data.keys() and package_data[&#39;index&#39;] == &#39;pypi&#39;:
                 # Add download location with hashes stored in Pipfile.lock
-                for pip_hash in package_data[&#39;hashes&#39;]:
-                    ext_ref = ExternalReference(
-                        reference_type=ExternalReferenceType.DISTRIBUTION,
-                        url=c.get_pypi_url(),
-                        comment=&#39;Distribution available from pypi.org&#39;
-                    )
-                    ext_ref.add_hash(HashType.from_composite_str(pip_hash))
-                    c.add_external_reference(ext_ref)
+                if &#39;hashes&#39; in package_data.keys():
+                    for pip_hash in package_data[&#39;hashes&#39;]:
+
+                        ext_ref = ExternalReference(
+                            reference_type=ExternalReferenceType.DISTRIBUTION,
+                            url=c.get_pypi_url(),
+                            comment=&#39;Distribution available from pypi.org&#39;
+                        )
+                        ext_ref.add_hash(HashType.from_composite_str(pip_hash))
+                        c.add_external_reference(ext_ref)
 
             self._components.append(c)</code></pre>
 </details>

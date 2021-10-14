@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L1-L299" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L1-L286" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -75,16 +75,11 @@ class Tool:
         See the CycloneDX Schema for toolType: https://cyclonedx.org/docs/1.3/#type_toolType
     &#34;&#34;&#34;
 
-    _vendor: str = None
-    _name: str = None
-    _version: str = None
-    _hashes: List[HashType] = []
-
     def __init__(self, vendor: str, name: str, version: str, hashes: List[HashType] = []):
         self._vendor = vendor
         self._name = name
         self._version = version
-        self._hashes = hashes
+        self._hashes: List[HashType] = hashes
 
     def get_hashes(self) -&gt; List[HashType]:
         &#34;&#34;&#34;
@@ -145,15 +140,11 @@ class BomMetaData:
         See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
     &#34;&#34;&#34;
 
-    _timestamp: datetime.datetime
-    _tools: List[Tool] = []
-
     def __init__(self, tools: List[Tool] = []):
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
-        self._tools.clear()
+        self._tools: List[Tool] = tools
         if len(tools) == 0:
             tools.append(ThisTool)
-        self._tools = tools
 
     def add_tool(self, tool: Tool):
         &#34;&#34;&#34;
@@ -196,10 +187,6 @@ class Bom:
     `cyclonedx.output.BaseOutput` to produce a CycloneDX document according to a specific schema version and format.
     &#34;&#34;&#34;
 
-    _uuid: str
-    _metadata: BomMetaData = None
-    _components: List[Component] = []
-
     @staticmethod
     def from_parser(parser: BaseParser):
         &#34;&#34;&#34;
@@ -223,8 +210,8 @@ class Bom:
             New, empty `cyclonedx.model.bom.Bom` instance.
         &#34;&#34;&#34;
         self._uuid = uuid4()
-        self._metadata = BomMetaData(tools=[])
-        self._components.clear()
+        self._metadata: BomMetaData = BomMetaData(tools=[])
+        self._components: List[Component] = []
 
     def add_component(self, component: Component):
         &#34;&#34;&#34;
@@ -361,7 +348,7 @@ from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#c
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L150-L299" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L141-L286" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Bom:
     &#34;&#34;&#34;
@@ -373,10 +360,6 @@ from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#c
     Once you have an instance of `cyclonedx.model.bom.Bom`, you can pass this to an instance of
     `cyclonedx.output.BaseOutput` to produce a CycloneDX document according to a specific schema version and format.
     &#34;&#34;&#34;
-
-    _uuid: str
-    _metadata: BomMetaData = None
-    _components: List[Component] = []
 
     @staticmethod
     def from_parser(parser: BaseParser):
@@ -401,8 +384,8 @@ from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#c
             New, empty `cyclonedx.model.bom.Bom` instance.
         &#34;&#34;&#34;
         self._uuid = uuid4()
-        self._metadata = BomMetaData(tools=[])
-        self._components.clear()
+        self._metadata: BomMetaData = BomMetaData(tools=[])
+        self._components: List[Component] = []
 
     def add_component(self, component: Component):
         &#34;&#34;&#34;
@@ -528,7 +511,7 @@ from a <code><a title="cyclonedx.parser.BaseParser" href="../parser/index.html#c
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L165-L178" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L152-L165" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@staticmethod
 def from_parser(parser: BaseParser):
@@ -562,7 +545,7 @@ def from_parser(parser: BaseParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L191-L203" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L178-L190" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_component(self, component: Component):
     &#34;&#34;&#34;
@@ -592,7 +575,7 @@ List of <code><a title="cyclonedx.model.component.Component" href="component.htm
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L205-L216" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L192-L203" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_components(self, components: List[Component]):
     &#34;&#34;&#34;
@@ -618,7 +601,7 @@ List of <code><a title="cyclonedx.model.component.Component" href="component.htm
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L218-L225" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L205-L212" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_count(self) -&gt; int:
     &#34;&#34;&#34;
@@ -643,7 +626,7 @@ Package URL as a <code>str</code> to look and find <code>Component</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L227-L242" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L214-L229" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_component_by_purl(self, purl: str) -&gt; Union[Component, None]:
     &#34;&#34;&#34;
@@ -673,7 +656,7 @@ Package URL as a <code>str</code> to look and find <code>Component</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L244-L251" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L231-L238" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_components(self) -&gt; List[Component]:
     &#34;&#34;&#34;
@@ -699,7 +682,7 @@ Package URL as a <code>str</code> to look and find <code>Component</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L253-L263" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L240-L250" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_metadata(self) -&gt; BomMetaData:
     &#34;&#34;&#34;
@@ -724,7 +707,7 @@ Package URL as a <code>str</code> to look and find <code>Component</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L265-L272" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L252-L259" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_urn_uuid(self) -&gt; str:
     &#34;&#34;&#34;
@@ -749,7 +732,7 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L274-L285" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L261-L272" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def has_component(self, component: Component) -&gt; bool:
     &#34;&#34;&#34;
@@ -776,7 +759,7 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L287-L299" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L274-L286" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def has_vulnerabilities(self) -&gt; bool:
     &#34;&#34;&#34;
@@ -808,7 +791,7 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L102-L147" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L97-L138" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class BomMetaData:
     &#34;&#34;&#34;
@@ -818,15 +801,11 @@ The instance of <code><a title="cyclonedx.model.component.Component" href="compo
         See the CycloneDX Schema for Bom metadata: https://cyclonedx.org/docs/1.3/#type_metadata
     &#34;&#34;&#34;
 
-    _timestamp: datetime.datetime
-    _tools: List[Tool] = []
-
     def __init__(self, tools: List[Tool] = []):
         self._timestamp = datetime.datetime.now(tz=datetime.timezone.utc)
-        self._tools.clear()
+        self._tools: List[Tool] = tools
         if len(tools) == 0:
             tools.append(ThisTool)
-        self._tools = tools
 
     def add_tool(self, tool: Tool):
         &#34;&#34;&#34;
@@ -871,7 +850,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L120-L129" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L111-L120" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_tool(self, tool: Tool):
     &#34;&#34;&#34;
@@ -895,7 +874,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L131-L138" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L122-L129" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_timestamp(self) -&gt; datetime.datetime:
     &#34;&#34;&#34;
@@ -917,7 +896,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L140-L147" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L131-L138" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_tools(self) -&gt; List[Tool]:
     &#34;&#34;&#34;
@@ -945,7 +924,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L30-L88" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L30-L83" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Tool:
     &#34;&#34;&#34;
@@ -957,16 +936,11 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
         See the CycloneDX Schema for toolType: https://cyclonedx.org/docs/1.3/#type_toolType
     &#34;&#34;&#34;
 
-    _vendor: str = None
-    _name: str = None
-    _version: str = None
-    _hashes: List[HashType] = []
-
     def __init__(self, vendor: str, name: str, version: str, hashes: List[HashType] = []):
         self._vendor = vendor
         self._name = name
         self._version = version
-        self._hashes = hashes
+        self._hashes: List[HashType] = hashes
 
     def get_hashes(self) -&gt; List[HashType]:
         &#34;&#34;&#34;
@@ -1019,7 +993,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L51-L58" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L46-L53" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_hashes(self) -&gt; List[HashType]:
     &#34;&#34;&#34;
@@ -1041,7 +1015,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L60-L67" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L55-L62" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_name(self) -&gt; str:
     &#34;&#34;&#34;
@@ -1063,7 +1037,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L69-L76" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L64-L71" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_vendor(self) -&gt; str:
     &#34;&#34;&#34;
@@ -1085,7 +1059,7 @@ Instance of <code><a title="cyclonedx.model.bom.Tool" href="#cyclonedx.model.bom
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/bb3af916f1ff0e224d9c197596570bca98ea4525/cyclonedx/model/bom.py#L78-L85" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/model/bom.py#L73-L80" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_version(self) -&gt; str:
     &#34;&#34;&#34;
