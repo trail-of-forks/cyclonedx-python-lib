@@ -38,7 +38,7 @@ if you want to derive CycloneDX from declared dependencies.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/parser/environment.py#L1-L77" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/environment.py#L1-L78" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -105,9 +105,10 @@ class EnvironmentParser(BaseParser):
             if &#39;License&#39; in i_metadata.keys() and i_metadata.get(&#39;License&#39;) != &#39;UNKNOWN&#39;:
                 c.set_license(license_str=i_metadata.get(&#39;License&#39;))
 
-            for classifier in i_metadata.get_all(&#39;Classifier&#39;):
-                if str(classifier).startswith(&#39;License :: OSI Approved :: &#39;):
-                    c.set_license(license_str=str(classifier).replace(&#39;License :: OSI Approved :: &#39;, &#39;&#39;).strip())
+            if &#39;Classifier&#39; in i_metadata.keys():
+                for classifier in i_metadata.get_all(&#39;Classifier&#39;):
+                    if str(classifier).startswith(&#39;License :: OSI Approved :: &#39;):
+                        c.set_license(license_str=str(classifier).replace(&#39;License :: OSI Approved :: &#39;, &#39;&#39;).strip())
 
             self._components.append(c)
 
@@ -137,7 +138,7 @@ class EnvironmentParser(BaseParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/parser/environment.py#L43-L77" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/environment.py#L43-L78" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class EnvironmentParser(BaseParser):
     &#34;&#34;&#34;
@@ -162,9 +163,10 @@ class EnvironmentParser(BaseParser):
             if &#39;License&#39; in i_metadata.keys() and i_metadata.get(&#39;License&#39;) != &#39;UNKNOWN&#39;:
                 c.set_license(license_str=i_metadata.get(&#39;License&#39;))
 
-            for classifier in i_metadata.get_all(&#39;Classifier&#39;):
-                if str(classifier).startswith(&#39;License :: OSI Approved :: &#39;):
-                    c.set_license(license_str=str(classifier).replace(&#39;License :: OSI Approved :: &#39;, &#39;&#39;).strip())
+            if &#39;Classifier&#39; in i_metadata.keys():
+                for classifier in i_metadata.get_all(&#39;Classifier&#39;):
+                    if str(classifier).startswith(&#39;License :: OSI Approved :: &#39;):
+                        c.set_license(license_str=str(classifier).replace(&#39;License :: OSI Approved :: &#39;, &#39;&#39;).strip())
 
             self._components.append(c)
 
