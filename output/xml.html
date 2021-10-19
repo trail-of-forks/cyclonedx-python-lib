@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L1-L238" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L1-L244" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -139,6 +139,12 @@ class Xml(BaseOutput, BaseSchemaVersion):
 
         # purl
         ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
+
+        # licenses
+        if component.get_license():
+            licenses_e = ElementTree.SubElement(component_element, &#39;licenses&#39;)
+            license_e = ElementTree.SubElement(licenses_e, &#39;license&#39;)
+            ElementTree.SubElement(license_e, &#39;name&#39;).text = component.get_license()
 
         # externalReferences
         if self.component_supports_external_references() and len(component.get_external_references()) &gt; 0:
@@ -295,7 +301,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L30-L220" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L30-L226" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Xml(BaseOutput, BaseSchemaVersion):
     XML_VERSION_DECLARATION: str = &#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&#39;
@@ -371,6 +377,12 @@ inheritance.</p></div>
 
         # purl
         ElementTree.SubElement(component_element, &#39;purl&#39;).text = component.get_purl()
+
+        # licenses
+        if component.get_license():
+            licenses_e = ElementTree.SubElement(component_element, &#39;licenses&#39;)
+            license_e = ElementTree.SubElement(licenses_e, &#39;license&#39;)
+            ElementTree.SubElement(license_e, &#39;name&#39;).text = component.get_license()
 
         # externalReferences
         if self.component_supports_external_references() and len(component.get_external_references()) &gt; 0:
@@ -519,7 +531,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L36-L38" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L36-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@staticmethod
 def get_vulnerabilities_namespace() -&gt; str:
@@ -537,7 +549,7 @@ def get_vulnerabilities_namespace() -&gt; str:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L33-L34" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L33-L34" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_target_namespace(self) -&gt; str:
     return &#39;http://cyclonedx.org/schema/bom/{}&#39;.format(self.get_schema_version())</code></pre>
@@ -551,7 +563,7 @@ def get_vulnerabilities_namespace() -&gt; str:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L40-L61" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L40-L61" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def output_as_string(self) -&gt; str:
     bom = self._get_bom_root_element()
@@ -589,7 +601,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L223-L226" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L229-L232" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class XmlV1Dot0(Xml, SchemaVersion1Dot0):
 
@@ -622,7 +634,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L229-L230" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L235-L236" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class XmlV1Dot1(Xml, SchemaVersion1Dot1):
     pass</code></pre>
@@ -653,7 +665,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L233-L234" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L239-L240" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class XmlV1Dot2(Xml, SchemaVersion1Dot2):
     pass</code></pre>
@@ -684,7 +696,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/xml.py#L237-L238" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/xml.py#L243-L244" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class XmlV1Dot3(Xml, SchemaVersion1Dot3):
     pass</code></pre>

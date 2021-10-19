@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L1-L137" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L1-L146" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -102,6 +102,15 @@ class Json(BaseOutput, BaseSchemaVersion):
                     &#34;content&#34;: component_hash.get_hash_value()
                 })
             c[&#39;hashes&#39;] = hashes
+
+        if component.get_license():
+            c[&#39;licenses&#39;] = [
+                {
+                    &#34;license&#34;: {
+                        &#34;name&#34;: component.get_license()
+                    }
+                }
+            ]
 
         if self.component_supports_author() and component.get_author():
             c[&#39;author&#39;] = component.get_author()
@@ -194,7 +203,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L27-L121" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L27-L130" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Json(BaseOutput, BaseSchemaVersion):
 
@@ -236,6 +245,15 @@ inheritance.</p></div>
                     &#34;content&#34;: component_hash.get_hash_value()
                 })
             c[&#39;hashes&#39;] = hashes
+
+        if component.get_license():
+            c[&#39;licenses&#39;] = [
+                {
+                    &#34;license&#34;: {
+                        &#34;name&#34;: component.get_license()
+                    }
+                }
+            ]
 
         if self.component_supports_author() and component.get_author():
             c[&#39;author&#39;] = component.get_author()
@@ -315,7 +333,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L29-L30" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L29-L30" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def output_as_string(self) -&gt; str:
     return json.dumps(self._get_json())</code></pre>
@@ -333,7 +351,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L124-L125" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L133-L134" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot0(Json, SchemaVersion1Dot0):
     pass</code></pre>
@@ -357,7 +375,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L128-L129" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L137-L138" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot1(Json, SchemaVersion1Dot1):
     pass</code></pre>
@@ -381,7 +399,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L132-L133" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L141-L142" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot2(Json, SchemaVersion1Dot2):
     pass</code></pre>
@@ -405,7 +423,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/4079323617263886319ddcf80ee1d77909a40b69/cyclonedx/output/json.py#L136-L137" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/d45f75b88611ab97f39bde672cbdd9e8ff71dd3e/cyclonedx/output/json.py#L145-L146" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class JsonV1Dot3(Json, SchemaVersion1Dot3):
     pass</code></pre>
