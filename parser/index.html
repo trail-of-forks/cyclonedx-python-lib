@@ -37,159 +37,28 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 obtained and limitations of what information is available to each Parser. The table below explains coverage as to what
 information is obtained by each set of Parsers. It does NOT guarantee the information is output in the resulting
 CycloneDX BOM document.</p>
-<table>
-<thead>
-<tr>
-<th>Data Path</th>
-<th>Environment</th>
-<th>Pipenv</th>
-<th>Poetry</th>
-<th>Requirements</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>component.supplier</code></td>
-<td>N (if in package METADATA)</td>
-<td>N/A</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>component.author</code></td>
-<td>Y (if in package METADATA)</td>
-<td>N/A</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>component.publisher</code></td>
-<td>N (if in package METADATA)</td>
-<td>N/A</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>component.group</code></td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>component.name</code></td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-</tr>
-<tr>
-<td><code>component.version</code></td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-</tr>
-<tr>
-<td><code>component.description</code></td>
-<td>N</td>
-<td>N/A</td>
-<td>N</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.scope</code></td>
-<td>N</td>
-<td>N/A</td>
-<td>N</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.hashes</code></td>
-<td>N/A</td>
-<td>Y - see below (1)</td>
-<td>Y - see below (1)</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.licenses</code></td>
-<td>Y (if in package METADATA)</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.copyright</code></td>
-<td>N (if in package METADATA)</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.cpe</code></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-</tr>
-<tr>
-<td><code>component.purl</code></td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-</tr>
-<tr>
-<td><code>component.swid</code></td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.modified</code></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-<td><em>Deprecated</em></td>
-</tr>
-<tr>
-<td><code>component.pedigree</code></td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.externalReferences</code></td>
-<td>N/A</td>
-<td>Y - see below (1)</td>
-<td>Y - see below (1)</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.properties</code></td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.components</code></td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><code>component.evidence</code></td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
+<p>| Data Path | Conda | Environment | Pipenv | Poetry | Requirements |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| <code>component.supplier</code> | N | N (if in package METADATA) | N/A | | |
+| <code>component.author</code> | N | Y (if in package METADATA) | N/A | | |
+| <code>component.publisher</code> | N | N (if in package METADATA) | N/A | | |
+| <code>component.group</code> | - | - | - | - | - |
+| <code>component.name</code> | Y |Y | Y | Y | Y |
+| <code>component.version</code> | Y |Y | Y | Y | Y |
+| <code>component.description</code> | N |N | N/A | N | N/A |
+| <code>component.scope</code> | N |N | N/A | N | N/A |
+| <code>component.hashes</code> | Y - see below (2) | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| <code>component.licenses</code> | N | Y (if in package METADATA) | N/A | N/A | N/A |
+| <code>component.copyright</code> | N |N (if in package METADATA) | N/A | N/A | N/A |
+| <code>component.cpe</code> | <em>Deprecated</em> |<em>Deprecated</em> | <em>Deprecated</em> | <em>Deprecated</em> | <em>Deprecated</em> |
+| <code>component.purl</code> | Y |Y | Y | Y | Y |
+| <code>component.swid</code> | N/A |N/A | N/A | N/A | N/A |
+| <code>component.modified</code> | <em>Deprecated</em> |<em>Deprecated</em> | <em>Deprecated</em> | <em>Deprecated</em> | <em>Deprecated</em> |
+| <code>component.pedigree</code> | N/A |N/A | N/A | N/A | N/A |
+| <code>component.externalReferences</code> | Y - see below (3) | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| <code>component.properties</code> | N/A | N/A | N/A | N/A | N/A |
+| <code>component.components</code> | N/A | N/A | N/A | N/A | N/A |
+| <code>component.evidence</code> | N/A | N/A | N/A | N/A | N/A |</p>
 <p><strong>Legend:</strong></p>
 <ul>
 <li><code>Y</code>: YES with any caveat states.</li>
@@ -204,11 +73,14 @@ package and version multiple artefacts are possible - which would mean multiple 
 supports only a single set of hashes identifying a single artefact at <code>component.hashes</code>. To cater for this
 situation in Python, we add the hashes to <code>component.externalReferences</code>, as we cannot determine which package was
 actually obtained and installed to meet a given dependency.</li>
+<li>MD5 hashses are available when using the <code>CondaListExplicitParser</code> with output from the conda command
+<code>conda list --explicit --md5</code> only.</li>
+<li>For Conda, we provide a link to the registry as provided in the Conda output.</li>
 </ol>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L1-L109" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L1-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -236,28 +108,28 @@ obtained and limitations of what information is available to each Parser. The ta
 information is obtained by each set of Parsers. It does NOT guarantee the information is output in the resulting
 CycloneDX BOM document.
 
-| Data Path | Environment | Pipenv | Poetry | Requirements |
+| Data Path | Conda | Environment | Pipenv | Poetry | Requirements |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| `component.supplier` | N (if in package METADATA) | N/A | | |
-| `component.author` | Y (if in package METADATA) | N/A | | |
-| `component.publisher` | N (if in package METADATA) | N/A | | |
-| `component.group` | - | - | - | - |
-| `component.name` | Y | Y | Y | Y |
-| `component.version` | Y | Y | Y | Y |
-| `component.description` | N | N/A | N | N/A |
-| `component.scope` | N | N/A | N | N/A |
-| `component.hashes` | N/A | Y - see below (1) | Y - see below (1) | N/A |
-| `component.licenses` | Y (if in package METADATA) | N/A | N/A | N/A |
-| `component.copyright` | N (if in package METADATA) | N/A | N/A | N/A |
-| `component.cpe` | _Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
-| `component.purl` | Y | Y | Y | Y |
-| `component.swid` | N/A | N/A | N/A | N/A |
-| `component.modified` | _Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
-| `component.pedigree` | N/A | N/A | N/A | N/A |
-| `component.externalReferences` | N/A | Y - see below (1) | Y - see below (1) | N/A |
-| `component.properties` | N/A | N/A | N/A | N/A |
-| `component.components` | N/A | N/A | N/A | N/A |
-| `component.evidence` | N/A | N/A | N/A | N/A |
+| `component.supplier` | N | N (if in package METADATA) | N/A | | |
+| `component.author` | N | Y (if in package METADATA) | N/A | | |
+| `component.publisher` | N | N (if in package METADATA) | N/A | | |
+| `component.group` | - | - | - | - | - |
+| `component.name` | Y |Y | Y | Y | Y |
+| `component.version` | Y |Y | Y | Y | Y |
+| `component.description` | N |N | N/A | N | N/A |
+| `component.scope` | N |N | N/A | N | N/A |
+| `component.hashes` | Y - see below (2) | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| `component.licenses` | N | Y (if in package METADATA) | N/A | N/A | N/A |
+| `component.copyright` | N |N (if in package METADATA) | N/A | N/A | N/A |
+| `component.cpe` | _Deprecated_ |_Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
+| `component.purl` | Y |Y | Y | Y | Y |
+| `component.swid` | N/A |N/A | N/A | N/A | N/A |
+| `component.modified` | _Deprecated_ |_Deprecated_ | _Deprecated_ | _Deprecated_ | _Deprecated_ |
+| `component.pedigree` | N/A |N/A | N/A | N/A | N/A |
+| `component.externalReferences` | Y - see below (3) | N/A | Y - see below (1) | Y - see below (1) | N/A |
+| `component.properties` | N/A | N/A | N/A | N/A | N/A |
+| `component.components` | N/A | N/A | N/A | N/A | N/A |
+| `component.evidence` | N/A | N/A | N/A | N/A | N/A |
 
 **Legend:**
 
@@ -273,6 +145,9 @@ CycloneDX BOM document.
     supports only a single set of hashes identifying a single artefact at `component.hashes`. To cater for this
     situation in Python, we add the hashes to `component.externalReferences`, as we cannot determine which package was
     actually obtained and installed to meet a given dependency.
+2. MD5 hashses are available when using the `CondaListExplicitParser` with output from the conda command
+    `conda list --explicit --md5` only.
+3. For Conda, we provide a link to the registry as provided in the Conda output.
 
 &#34;&#34;&#34;
 
@@ -324,6 +199,10 @@ class BaseParser(ABC):
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
+<dt><code class="name"><a title="cyclonedx.parser.conda" href="conda.html">cyclonedx.parser.conda</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
 <dt><code class="name"><a title="cyclonedx.parser.environment" href="environment.html">cyclonedx.parser.environment</a></code></dt>
 <dd>
 <div class="desc"><p>Parser classes for reading installed packages in your current Python environment …</p></div>
@@ -358,7 +237,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L91-L109" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L94-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class BaseParser(ABC):
     _components: List[Component] = []
@@ -386,6 +265,7 @@ inheritance.</p></div>
 </ul>
 <h3>Subclasses</h3>
 <ul class="hlist">
+<li>cyclonedx.parser.conda._BaseCondaParser</li>
 <li><a title="cyclonedx.parser.environment.EnvironmentParser" href="environment.html#cyclonedx.parser.environment.EnvironmentParser">EnvironmentParser</a></li>
 <li><a title="cyclonedx.parser.pipenv.PipEnvParser" href="pipenv.html#cyclonedx.parser.pipenv.PipEnvParser">PipEnvParser</a></li>
 <li><a title="cyclonedx.parser.poetry.PoetryParser" href="poetry.html#cyclonedx.parser.poetry.PoetryParser">PoetryParser</a></li>
@@ -401,7 +281,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L99-L100" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L102-L103" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_count(self) -&gt; int:
     return len(self._components)</code></pre>
@@ -415,7 +295,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L102-L103" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L105-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_components(self) -&gt; List[Component]:
     return self._components</code></pre>
@@ -429,7 +309,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L105-L106" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L108-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warnings(self) -&gt; List[ParserWarning]:
     return self._warnings</code></pre>
@@ -443,7 +323,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L108-L109" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L111-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def has_warnings(self) -&gt; bool:
     return len(self._warnings) &gt; 0</code></pre>
@@ -460,7 +340,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L73-L88" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L76-L91" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ParserWarning:
     _item: str
@@ -489,7 +369,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L81-L82" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L84-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_item(self) -&gt; str:
     return self._item</code></pre>
@@ -503,7 +383,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/51a1e50aad27c1f862812031be74281e839815df/cyclonedx/parser/__init__.py#L84-L85" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/ee5d36dd677abfb1ba5600b44abf45cb2612b792/cyclonedx/parser/__init__.py#L87-L88" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warning_message(self) -&gt; str:
     return self._warning</code></pre>
@@ -536,6 +416,7 @@ data-gaCategoryParameter="cyclonedx.parser">
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
+<li><code><a title="cyclonedx.parser.conda" href="conda.html">cyclonedx.parser.conda</a></code></li>
 <li><code><a title="cyclonedx.parser.environment" href="environment.html">cyclonedx.parser.environment</a></code></li>
 <li><code><a title="cyclonedx.parser.pipenv" href="pipenv.html">cyclonedx.parser.pipenv</a></code></li>
 <li><code><a title="cyclonedx.parser.poetry" href="poetry.html">cyclonedx.parser.poetry</a></code></li>
