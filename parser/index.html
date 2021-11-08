@@ -80,7 +80,7 @@ actually obtained and installed to meet a given dependency.</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L1-L112" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L1-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -237,7 +237,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L94-L112" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L94-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class BaseParser(ABC):
     _components: List[Component] = []
@@ -281,7 +281,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L102-L103" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L102-L103" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_count(self) -&gt; int:
     return len(self._components)</code></pre>
@@ -295,7 +295,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L105-L106" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L105-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_components(self) -&gt; List[Component]:
     return self._components</code></pre>
@@ -309,7 +309,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L108-L109" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L108-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warnings(self) -&gt; List[ParserWarning]:
     return self._warnings</code></pre>
@@ -323,7 +323,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L111-L112" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L111-L112" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def has_warnings(self) -&gt; bool:
     return len(self._warnings) &gt; 0</code></pre>
@@ -340,7 +340,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L76-L91" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L76-L91" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ParserWarning:
     _item: str
@@ -369,7 +369,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L84-L85" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L84-L85" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_item(self) -&gt; str:
     return self._item</code></pre>
@@ -383,7 +383,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/c54c96853e3325571dee26038e965279d5b9cfe2/cyclonedx/parser/__init__.py#L87-L88" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/0525439d2237684ce531449d19e60456fc46d26b/cyclonedx/parser/__init__.py#L87-L88" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_warning_message(self) -&gt; str:
     return self._warning</code></pre>
