@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L1-L89" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L1-L90" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -55,7 +55,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) OWASP Foundation. All Rights Reserved.
 
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 class BaseSchemaVersion(ABC):
@@ -75,8 +75,9 @@ class BaseSchemaVersion(ABC):
     def component_supports_external_references(self) -&gt; bool:
         return True
 
+    @abstractmethod
     def get_schema_version(self) -&gt; str:
-        pass
+        raise NotImplementedError
 
 
 class SchemaVersion1Dot3(BaseSchemaVersion):
@@ -145,7 +146,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L23-L41" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L23-L42" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class BaseSchemaVersion(ABC):
 
@@ -164,8 +165,9 @@ inheritance.</p></div>
     def component_supports_external_references(self) -&gt; bool:
         return True
 
+    @abstractmethod
     def get_schema_version(self) -&gt; str:
-        pass</code></pre>
+        raise NotImplementedError</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -190,7 +192,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L25-L26" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L25-L26" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
     return True</code></pre>
@@ -204,7 +206,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L28-L29" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L28-L29" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_supports_metadata(self) -&gt; bool:
     return True</code></pre>
@@ -218,7 +220,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L31-L32" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L31-L32" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_author(self) -&gt; bool:
     return True</code></pre>
@@ -232,7 +234,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L34-L35" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L34-L35" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_bom_ref(self) -&gt; bool:
     return True</code></pre>
@@ -246,7 +248,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L37-L38" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L37-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_external_references(self) -&gt; bool:
     return True</code></pre>
@@ -260,10 +262,11 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L40-L41" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L40-L42" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">def get_schema_version(self) -&gt; str:
-    pass</code></pre>
+<pre><code class="python">@abstractmethod
+def get_schema_version(self) -&gt; str:
+    raise NotImplementedError</code></pre>
 </details>
 </dd>
 </dl>
@@ -277,7 +280,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L71-L89" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L72-L90" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot0(BaseSchemaVersion):
 
@@ -319,7 +322,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L73-L74" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L74-L75" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
     return False</code></pre>
@@ -333,7 +336,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L76-L77" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L77-L78" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_supports_metadata(self) -&gt; bool:
     return False</code></pre>
@@ -347,7 +350,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L79-L80" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L80-L81" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_author(self) -&gt; bool:
     return False</code></pre>
@@ -361,7 +364,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L82-L83" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L83-L84" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_bom_ref(self) -&gt; bool:
     return False</code></pre>
@@ -375,7 +378,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L85-L86" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L86-L87" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_external_references(self) -&gt; bool:
     return False</code></pre>
@@ -389,7 +392,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L88-L89" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L89-L90" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_schema_version(self) -&gt; str:
     return &#39;1.0&#39;</code></pre>
@@ -406,7 +409,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L56-L68" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L57-L69" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot1(BaseSchemaVersion):
 
@@ -442,7 +445,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L58-L59" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L59-L60" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_metadata_supports_tools(self) -&gt; bool:
     return False</code></pre>
@@ -456,7 +459,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L61-L62" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L62-L63" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bom_supports_metadata(self) -&gt; bool:
     return False</code></pre>
@@ -470,7 +473,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L64-L65" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L65-L66" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def component_supports_author(self) -&gt; bool:
     return False</code></pre>
@@ -484,7 +487,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L67-L68" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L68-L69" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_schema_version(self) -&gt; str:
     return &#39;1.1&#39;</code></pre>
@@ -501,7 +504,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L50-L53" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L51-L54" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot2(BaseSchemaVersion):
 
@@ -528,7 +531,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L52-L53" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L53-L54" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_schema_version(self) -&gt; str:
     return &#39;1.2&#39;</code></pre>
@@ -545,7 +548,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L44-L47" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L45-L48" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class SchemaVersion1Dot3(BaseSchemaVersion):
 
@@ -572,7 +575,7 @@ inheritance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/output/schema.py#L46-L47" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/output/schema.py#L47-L48" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_schema_version(self) -&gt; str:
     return &#39;1.3&#39;</code></pre>

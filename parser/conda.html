@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/parser/conda.py#L1-L96" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/parser/conda.py#L1-L95" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -55,7 +55,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) OWASP Foundation. All Rights Reserved.
 import json
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 from typing import List
 
 from . import BaseParser
@@ -64,11 +64,10 @@ from ..model.component import Component
 from ..utils.conda import parse_conda_json_to_conda_package, parse_conda_list_str_to_conda_package, CondaPackage
 
 
-class _BaseCondaParser(BaseParser):
+class _BaseCondaParser(BaseParser, metaclass=ABCMeta):
+    &#34;&#34;&#34;Internal abstract parser - not for programmatic use.
     &#34;&#34;&#34;
-    Internal abstract parser - not for programatic use.
 
-    &#34;&#34;&#34;
     def __init__(self, conda_data: str):
         super().__init__()
         self._conda_packages: List[CondaPackage] = []
@@ -153,7 +152,7 @@ class CondaListExplicitParser(_BaseCondaParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/parser/conda.py#L85-L96" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/parser/conda.py#L84-L95" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class CondaListExplicitParser(_BaseCondaParser):
     &#34;&#34;&#34;
@@ -184,7 +183,7 @@ class CondaListExplicitParser(_BaseCondaParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/08bc4ab2b01c76d7472a558cae02deab0485c61c/cyclonedx/parser/conda.py#L71-L82" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/f34e2c2bc7aed20968a5ac69337ed484d097af3b/cyclonedx/parser/conda.py#L70-L81" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class CondaListJsonParser(_BaseCondaParser):
     &#34;&#34;&#34;
