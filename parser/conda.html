@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/7f28bef15ed0b9ed6af88286d5f6dcc0726b6feb/cyclonedx/parser/conda.py#L1-L97" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/931016d9b700280692903db5aa653d390a80bd63/cyclonedx/parser/conda.py#L1-L96" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># encoding: utf-8
 
@@ -76,16 +76,15 @@ class _BaseCondaParser(BaseParser):
         self._conda_packages_to_components()
 
     @abstractmethod
-    def _parse_to_conda_packages(self, data_str: str):
+    def _parse_to_conda_packages(self, data_str: str) -&gt; None:
         &#34;&#34;&#34;
-        Abstract method for implementation by concrete Conda Parsers
+        Abstract method for implementation by concrete Conda Parsers.
+
+        Implementation should add a `list` of `CondaPackage` instances to `self._conda_packages`
 
         Params:
             data_str:
                 `str` data passed into the Parser
-
-        Returns:
-            A `list` of `CondaPackage` instances parsed.
         &#34;&#34;&#34;
         pass
 
@@ -112,7 +111,7 @@ class CondaListJsonParser(_BaseCondaParser):
     This parser is intended to receive the output from the command `conda list --json`.
     &#34;&#34;&#34;
 
-    def _parse_to_conda_packages(self, data_str: str):
+    def _parse_to_conda_packages(self, data_str: str) -&gt; None:
         conda_list_content = json.loads(data_str)
 
         for package in conda_list_content:
@@ -127,7 +126,7 @@ class CondaListExplicitParser(_BaseCondaParser):
     `conda list --explicit --md5`.
     &#34;&#34;&#34;
 
-    def _parse_to_conda_packages(self, data_str: str):
+    def _parse_to_conda_packages(self, data_str: str) -&gt; None:
         for line in data_str.replace(&#39;\r\n&#39;, &#39;\n&#39;).split(&#39;\n&#39;):
             line = line.strip()
             conda_package = parse_conda_list_str_to_conda_package(conda_list_str=line)
@@ -154,7 +153,7 @@ class CondaListExplicitParser(_BaseCondaParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/7f28bef15ed0b9ed6af88286d5f6dcc0726b6feb/cyclonedx/parser/conda.py#L86-L97" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/931016d9b700280692903db5aa653d390a80bd63/cyclonedx/parser/conda.py#L85-L96" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class CondaListExplicitParser(_BaseCondaParser):
     &#34;&#34;&#34;
@@ -162,7 +161,7 @@ class CondaListExplicitParser(_BaseCondaParser):
     `conda list --explicit --md5`.
     &#34;&#34;&#34;
 
-    def _parse_to_conda_packages(self, data_str: str):
+    def _parse_to_conda_packages(self, data_str: str) -&gt; None:
         for line in data_str.replace(&#39;\r\n&#39;, &#39;\n&#39;).split(&#39;\n&#39;):
             line = line.strip()
             conda_package = parse_conda_list_str_to_conda_package(conda_list_str=line)
@@ -185,14 +184,14 @@ class CondaListExplicitParser(_BaseCondaParser):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/cyclonedx-python-lib/blob/7f28bef15ed0b9ed6af88286d5f6dcc0726b6feb/cyclonedx/parser/conda.py#L72-L83" class="git-link">Browse git</a>
+<a href="https://github.com/cyclonedx-python-lib/blob/931016d9b700280692903db5aa653d390a80bd63/cyclonedx/parser/conda.py#L71-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class CondaListJsonParser(_BaseCondaParser):
     &#34;&#34;&#34;
     This parser is intended to receive the output from the command `conda list --json`.
     &#34;&#34;&#34;
 
-    def _parse_to_conda_packages(self, data_str: str):
+    def _parse_to_conda_packages(self, data_str: str) -&gt; None:
         conda_list_content = json.loads(data_str)
 
         for package in conda_list_content:
